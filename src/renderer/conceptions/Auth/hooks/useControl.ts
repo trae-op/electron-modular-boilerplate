@@ -6,18 +6,11 @@ export const useControl = (): THookControl => {
   const handleProvider = useCallback((event: TEventButton) => {
     const provider = (event.target as HTMLButtonElement).dataset
       .provider as TProviders;
-    window.electron.send({
-      type: "windowAuth",
-      data: {
-        provider,
-      },
-    });
+    window.electron.send("windowAuth", { provider });
   }, []);
 
   const handleLogout = useCallback(() => {
-    window.electron.send({
-      type: "logout",
-    });
+    window.electron.send("logout");
   }, []);
 
   const value = useMemo(

@@ -16,12 +16,10 @@ type TEventPayloadSend = {
 
 type TSendTypes = keyof TEventPayloadSend;
 
-type TSendPayload<TType extends TSendTypes = TSendTypes> = {
-  type: TType;
-  data?: TEventPayloadSend[TType];
-};
+type TSendPayload<TType extends TSendTypes = TSendTypes> =
+  TEventPayloadSend[TType];
 
 type TSend = <TType extends TSendTypes>(
-  key: string,
-  payload: TSendPayload<TType>,
+  key: TType,
+  payload?: TSendPayload<TType>,
 ) => void;

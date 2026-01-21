@@ -1,11 +1,9 @@
 type TInvokeTypes = keyof TEventPayloadInvoke;
 
-type TInvokePayload<TType extends TInvokeTypes = TInvokeTypes> = {
-  type: TType;
-  data?: TEventSendInvoke[TType];
-};
+type TInvokePayload<TType extends TInvokeTypes = TInvokeTypes> =
+  TEventSendInvoke[TType];
 
 type TInvoke = <TType extends TInvokeTypes>(
-  key: string,
-  payload: TInvokePayload<TType>,
+  key: TType,
+  payload?: TInvokePayload<TType>,
 ) => Promise<TEventPayloadInvoke[TType]>;

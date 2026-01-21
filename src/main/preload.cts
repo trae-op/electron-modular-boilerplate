@@ -2,24 +2,24 @@ const electron = require("electron");
 
 electron.contextBridge.exposeInMainWorld("electron", {
   send: <TType extends TSendTypes>(
-    key: string,
-    payload: TSendPayload<TType>,
+    key: TType,
+    payload?: TSendPayload<TType>,
   ) => {
     electron.ipcRenderer.send(key, payload);
   },
   invoke: <TType extends TInvokeTypes>(
-    key: string,
-    payload: TInvokePayload<TType>,
+    key: TType,
+    payload?: TInvokePayload<TType>,
   ) => {
     return electron.ipcRenderer.invoke(key, payload);
   },
   receive: <TType extends TReceiveTypes>(
-    key: string,
-    callback: (payload: TReceivePayload<TType>) => void,
+    key: TType,
+    callback: (payload?: TReceivePayload<TType>) => void,
   ) => {
     const cb = (
       _: Electron.IpcRendererEvent,
-      payload: TReceivePayload<TType>,
+      payload?: TReceivePayload<TType>,
     ) => callback(payload);
 
     electron.ipcRenderer.on(key, cb);

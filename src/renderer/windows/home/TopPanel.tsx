@@ -9,10 +9,8 @@ import { Toggle as LightDarkModeToggle } from "@composites/LightDarkMode";
 
 import { TopPanel } from "@layouts/TopPanel";
 
-//shadow-none rounded-none border-0
 const ContainerPopover = memo(() => {
   const status = useStatusSelector();
-  // const buttonClassName = "shadow-none rounded-none border-0";
 
   const navItems = useMemo(
     () => [

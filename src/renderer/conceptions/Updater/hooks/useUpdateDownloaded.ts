@@ -12,18 +12,11 @@ export const useUpdateDownloaded = (): THookUpdateDownloaded => {
 
   const handleUpdate = useCallback(() => {
     if (platform === "win32") {
-      window.electron.send({
-        type: "restart",
-      });
+      window.electron.send("restart");
     }
 
     if (platform !== "win32" && updateFile !== undefined) {
-      window.electron.send({
-        type: "openLatestVersion",
-        data: {
-          updateFile,
-        },
-      });
+      window.electron.send("openLatestVersion", { updateFile });
     }
   }, [platform, updateFile]);
 

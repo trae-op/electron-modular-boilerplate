@@ -6,14 +6,12 @@ export const useIpc = () => {
   const setUser = useSetUserDispatch();
 
   useEffect(() => {
-    window.electron.send({
-      type: "user",
-    });
+    window.electron.send("user");
   }, []);
 
   useEffect(() => {
-    const unSub = window.electron.receive(({ type, data }) => {
-      if (type !== "user") {
+    const unSub = window.electron.receive("user", (data) => {
+      if (data === undefined) {
         return;
       }
 

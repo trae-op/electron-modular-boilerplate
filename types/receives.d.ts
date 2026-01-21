@@ -11,12 +11,10 @@ type TEventPayloadReceive = {
 
 type TReceiveTypes = keyof TEventPayloadReceive;
 
-type TReceivePayload<TType extends TReceiveTypes = TReceiveTypes> = {
-  type: TType;
-  data: TEventPayloadReceive[TType];
-};
+type TReceivePayload<TType extends TReceiveTypes = TReceiveTypes> =
+  TEventPayloadReceive[TType];
 
 type TReceive = <TType extends TReceiveTypes>(
-  key: string,
-  callback: (payload: TReceivePayload<TType>) => void,
+  key: TType,
+  callback: (payload?: TReceivePayload<TType>) => void,
 ) => TUnsubscribeFunction;

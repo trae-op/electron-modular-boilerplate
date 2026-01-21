@@ -61,12 +61,6 @@ import type {
       }),
       inject: [NotificationService],
     },
-  ],
-  exports: [
-    CheckForUpdatesService,
-    ControlUpdateWindowsPlatformService,
-    SetFeedUrlService,
-    OpenLatestVersionService,
-  ],
+  ]
 })
 export class UpdaterModule {}

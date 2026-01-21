@@ -7,18 +7,12 @@ const ContainerIpc = memo(({ children }: { children: ReactNode }) => {
   const setAuthenticated = useSetAuthenticatedDispatch();
 
   useEffect(() => {
-    window.electron.send({
-      type: "checkAuth",
-    });
+    window.electron.send("checkAuth");
   }, []);
 
   useEffect(() => {
-    window.electron.receive(({ type, data }) => {
-      if (type !== "auth") {
-        return;
-      }
-
-      if (!("isAuthenticated" in data)) {
+    window.electron.receive("auth", (data) => {
+      if (data === undefined) {
         return;
       }
 

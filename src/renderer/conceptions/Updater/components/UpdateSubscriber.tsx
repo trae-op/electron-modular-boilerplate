@@ -18,16 +18,12 @@ export const UpdateSubscriber = () => {
   const setStatus = useSetStatusDispatch();
 
   const subscribeUpdateApp = useCallback(() => {
-    return window.electron.receive((payload) => {
-      if (
-        payload.type !== "updateApp" ||
-        typeof payload.data !== "object" ||
-        payload.data === null
-      ) {
+    return window.electron.receive("updateApp", (payload) => {
+      if (payload === undefined) {
         return;
       }
 
-      const data = payload.data as TUpdateData;
+      const data = payload as TUpdateData;
 
       const {
         downloadedPercent,
@@ -48,9 +44,7 @@ export const UpdateSubscriber = () => {
   }, []);
 
   useEffect(() => {
-    window.electron.send({
-      type: "checkForUpdates",
-    });
+    window.electron.send("checkForUpdates");
   }, []);
 
   useEffect(() => {

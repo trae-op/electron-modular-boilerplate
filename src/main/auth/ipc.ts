@@ -30,6 +30,8 @@ export class AuthIpc {
       const userId = getElectronStorage("userId");
       const userFromCache = cacheUser(userId);
 
+      console.log("AuthIpc - checkAuth - userFromCache:", userFromCache);
+      console.log('mainWindow', mainWindow);
       if (mainWindow !== undefined) {
         ipcWebContentsSend('auth', mainWindow.webContents, {
           isAuthenticated: Boolean(userFromCache),

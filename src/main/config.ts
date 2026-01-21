@@ -63,7 +63,7 @@ export const messages = {
 };
 
 export const publishOptions = {
-  repo: "electron-react-auth-updater",
+  repo: "electron-modular-boilerplate",
   owner: "trae-op",
 };
 

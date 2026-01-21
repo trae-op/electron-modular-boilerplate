@@ -9,7 +9,7 @@ export type TEventsOptions = {
 };
 
 export type TCustomName = {
-  name: "check-update" | "show" | "quit";
+  name: "check-update" | "show" | "quit" | "app" | "edit";
 };
 
 export interface IMenuItemConstructorOptions

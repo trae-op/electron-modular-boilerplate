@@ -29,6 +29,7 @@
     "build:linux": "npm run transpile:electron && npm run build && electron-builder --linux --x64"
   },
   "dependencies": {
+    "@devisfuture/electron-modular": "^1.1.7",
     "@types/jsonwebtoken": "^9.0.10",
     "axios": "^1.10.0",
     "clsx": "^2.1.1",

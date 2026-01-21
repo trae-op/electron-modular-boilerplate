@@ -17,5 +17,6 @@ type TReceivePayload<TType extends TReceiveTypes = TReceiveTypes> = {
 };
 
 type TReceive = <TType extends TReceiveTypes>(
+  key: string,
   callback: (payload: TReceivePayload<TType>) => void,
 ) => TUnsubscribeFunction;

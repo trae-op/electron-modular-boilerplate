@@ -21,4 +21,7 @@ type TSendPayload<TType extends TSendTypes = TSendTypes> = {
   data?: TEventPayloadSend[TType];
 };
 
-type TSend = <TType extends TSendTypes>(payload: TSendPayload<TType>) => void;
+type TSend = <TType extends TSendTypes>(
+  key: string,
+  payload: TSendPayload<TType>,
+) => void;

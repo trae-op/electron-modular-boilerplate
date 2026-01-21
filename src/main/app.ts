@@ -1,5 +1,5 @@
+import { isDev } from "#shared/utils.js";
 import { bootstrapModules, initSettings } from "@devisfuture/electron-modular";
-import { isDev } from "@shared/utils.js";
 import dotenv from "dotenv";
 import { Menu, app } from "electron";
 import path from "node:path";

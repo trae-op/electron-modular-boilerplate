@@ -4,7 +4,7 @@ import {
   WindowManager,
   destroyWindows,
 } from "@devisfuture/electron-modular";
-import { isDev } from "@shared/utils.js";
+import { isDev } from "#shared/utils.js";
 import type { TWindowManager } from "../types.js";
 import {
   MENU_PROVIDER,

@@ -7,7 +7,7 @@ import {
   type TIpcHandlerInterface,
   type TParamOnInit,
 } from "@devisfuture/electron-modular";
-import { ipcMainOn } from "@shared/ipc/ipc.js";
+import { ipcMainOn } from "#shared/ipc/ipc.js";
 import { OpenLatestVersionService } from "./services/mac-os/open-latest-version.js";
 
 import { UPDATER_TRAY_PROVIDER } from "./tokens.js";

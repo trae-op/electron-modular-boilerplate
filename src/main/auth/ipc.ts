@@ -1,10 +1,10 @@
 import { session } from "electron";
 import { restApi } from "../config.js";
 import { IpcHandler, getWindow as getWindows, type TParamOnInit } from "@devisfuture/electron-modular";
-import { ipcMainOn, ipcWebContentsSend } from "@shared/ipc/ipc.js";
+import { ipcMainOn, ipcWebContentsSend } from "#shared/ipc/ipc.js";
 import type { AuthService } from "./service.js";
-import { getElectronStorage } from "#main/@shared/store.js";
-import { cacheUser } from "#main/@shared/cache-responses.js";
+import { getElectronStorage } from "#shared/store.js";
+import { cacheUser } from "#shared/cache-responses.js";
 
 @IpcHandler()
 export class AuthIpc {

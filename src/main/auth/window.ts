@@ -4,12 +4,12 @@ import {
   type WebContentsWillRedirectEventParams,
 } from "electron";
 import { WindowManager } from "@devisfuture/electron-modular";
-import { setElectronStorage } from "@shared/store.js";
-import { ipcWebContentsSend } from "@shared/ipc/ipc.js";
+import { setElectronStorage } from "#shared/store.js";
+import { ipcWebContentsSend } from "#shared/ipc/ipc.js";
 
 import { messages } from "../config.js";
 import type { TWindowManager } from "../types.js";
-import { showErrorMessages } from "#main/@shared/error-messages.js";
+import { showErrorMessages } from "#shared/error-messages.js";
 
 @WindowManager<TWindows['auth']>({
   hash: 'window:auth',

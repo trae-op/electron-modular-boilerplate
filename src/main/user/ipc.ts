@@ -2,10 +2,10 @@ import {
   IpcHandler,
   getWindow as getWindows,
 } from "@devisfuture/electron-modular";
-import { ipcMainOn } from "@shared/ipc/ipc.js";
+import { ipcMainOn } from "#shared/ipc/ipc.js";
 import { UserService } from "./service.js";
-import { getElectronStorage } from "@shared/store.js";
-import { cacheUser } from "#main/@shared/cache-responses.js";
+import { getElectronStorage } from "#shared/store.js";
+import { cacheUser } from "#shared/cache-responses.js";
 
 @IpcHandler()
 export class UserIpc {

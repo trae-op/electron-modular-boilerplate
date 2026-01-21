@@ -33,7 +33,6 @@
       "@conceptions/*": ["src/renderer/conceptions/*"],
       "@composites/*": ["src/renderer/composites/*"],
       "@utils/*": ["src/renderer/utils/*"],
-      "@shared/*": ["src/renderer/shared/*"],
       "@config/*": ["src/renderer/config/*"]
     }
   },

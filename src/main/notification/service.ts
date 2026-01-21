@@ -2,7 +2,7 @@ import { Notification, type NotificationConstructorOptions } from "electron";
 import path from "node:path";
 import { Injectable } from "@devisfuture/electron-modular";
 import { icons } from "../config.js";
-import { getAssetsPath } from "@shared/path-resolver.js";
+import { getAssetsPath } from "#shared/path-resolver.js";
 
 let notification: Notification | undefined = undefined;
 

@@ -1,7 +1,7 @@
 import { Menu } from "electron";
 import { menu } from "../config.js";
 import { Injectable } from "@devisfuture/electron-modular";
-import { isPlatform } from "@shared/utils.js";
+import { isPlatform } from "#shared/utils.js";
 import type { TMenuItem } from "#main/types.js";
 
 const defaultMenu = new Map<string, TMenuItem[]>([

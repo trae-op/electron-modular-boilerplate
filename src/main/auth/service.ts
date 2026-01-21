@@ -5,8 +5,8 @@ import {
 import {
   deleteFromElectronStorage,
   deleteStore,
-} from "@shared/store.js";
-import { ipcWebContentsSend } from "@shared/ipc/ipc.js";
+} from "#shared/store.js";
+import { ipcWebContentsSend } from "#shared/ipc/ipc.js";
 
 @Injectable()
 export class AuthService {

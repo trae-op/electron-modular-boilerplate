@@ -1,5 +1,5 @@
 import pkg from "electron-updater";
-import { isDev, isPlatform } from "@shared/utils.js";
+import { isDev, isPlatform } from "#shared/utils.js";
 import { Injectable } from "@devisfuture/electron-modular";
 import { publishOptions } from "#main/config.js";
 

@@ -8,7 +8,7 @@ import {
   setElectronStorage,
   getElectronStorage,
   TCacheResponse,
-} from "@shared/store.js";
+} from "#shared/store.js";
 import { restApi } from "../config.js";
 import type { ApiResponse, RequestOptions } from "./types.js";
 

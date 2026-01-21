@@ -2,8 +2,8 @@ import {  Menu, Tray } from "electron";
 import path from "node:path";
 import { icons, menu } from "../config.js";
 import { Injectable } from "@devisfuture/electron-modular";
-import { isDev, isPlatform } from "@shared/utils.js";
-import { getAssetsPath } from "@shared/path-resolver.js";
+import { isDev, isPlatform } from "#shared/utils.js";
+import { getAssetsPath } from "#shared/path-resolver.js";
 import type { TMenuItem } from "#main/types.js";
 
 const defaultMenu = new Map<string, TMenuItem[]>([

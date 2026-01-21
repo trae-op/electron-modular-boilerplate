@@ -1,7 +1,6 @@
+import { isDev } from "#shared/utils.js";
 import dotenv from "dotenv";
 import path from "node:path";
-
-import { isDev } from "./@shared/utils.js";
 
 const envPath = path.join(process.resourcesPath, ".env");
 dotenv.config(!isDev() ? { path: envPath } : undefined);

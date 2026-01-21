@@ -3,7 +3,7 @@ import {
   IpcHandler,
   type TIpcHandlerInterface,
 } from "@devisfuture/electron-modular";
-import { ipcMainHandle } from "@shared/ipc/ipc.js";
+import { ipcMainHandle } from "#shared/ipc/ipc.js";
 
 @IpcHandler()
 export class AppVersionIpc implements TIpcHandlerInterface {

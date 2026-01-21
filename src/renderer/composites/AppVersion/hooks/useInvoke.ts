@@ -7,9 +7,7 @@ export const useInvoke = (): THookInvoke => {
   const isSubscribe = useRef(true);
 
   const subscribe = useCallback(async () => {
-    const value = await window.electron.invoke({
-      type: "getVersion",
-    });
+    const value = await window.electron.invoke("getVersion");
 
     setVersion((prevValue) => (prevValue === value ? prevValue : value));
   }, []);

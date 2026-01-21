@@ -3,7 +3,7 @@ import {
   type Event,
   type WebContentsWillRedirectEventParams,
 } from "electron";
-import { WindowManager } from "@devisfuture/electron-modular";
+import { WindowManager, getWindow as getWindows } from "@devisfuture/electron-modular";
 import { setElectronStorage } from "#shared/store.js";
 import { ipcWebContentsSend } from "#shared/ipc/ipc.js";
 
@@ -56,11 +56,12 @@ export class AuthWindow implements TWindowManager {
     if (isVerify) {
       const token = searchParams.get("token");
       const userId = searchParams.get("userId");
+      const mainWindow = getWindows<TWindows["main"]>("window:main");
 
-      if (token !== null && userId !== null && this.window !== undefined) {
+      if (token !== null && userId !== null && this.window !== undefined && mainWindow !== undefined) {
         setElectronStorage("authToken", token);
         setElectronStorage("userId", userId);
-        ipcWebContentsSend("auth", this.window.webContents, {
+        ipcWebContentsSend("auth", mainWindow.webContents, {
           isAuthenticated: true,
         });
       } else {

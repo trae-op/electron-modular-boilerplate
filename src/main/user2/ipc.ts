@@ -1,0 +1,36 @@
+import {
+  IpcHandler,
+  getWindow as getWindows,
+} from "@devisfuture/electron-modular";
+import { ipcMainOn } from "@shared/ipc/ipc.js";
+import { UserService } from "./service.js";
+import { getElectronStorage } from "@shared/store.js";
+import { cacheUser } from "#main/@shared/cache-responses.js";
+
+@IpcHandler()
+export class UserIpc {
+  constructor(private userService: UserService) {}
+
+  onInit(): void {
+    ipcMainOn('user', async (event) => {
+      const userId = getElectronStorage("userId");
+      const getCacheUser = cacheUser(userId);
+      const mainWindow = getWindows<TWindows["main"]>("window:main");
+
+      if (mainWindow !== undefined) {
+        if (getCacheUser !== undefined) {
+          event.reply("user", {
+            user: getCacheUser,
+          });
+        }
+
+        const user = userId ? await this.userService.byId(userId) : undefined;
+        if (user !== undefined) {
+          event.reply("user", {
+            user,
+          });
+        }
+      }
+    });
+  }
+}

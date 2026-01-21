@@ -29,6 +29,10 @@ export function setStore<K extends keyof TStore>(name: K, value: TStore[K]) {
   store.set(name, value);
 }
 
+export function deleteStore<K extends keyof TStore>(name: K) {
+  store.delete(name);
+}
+
 export function clearStore() {
   store.clear();
 }

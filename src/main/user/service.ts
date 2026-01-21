@@ -1,6 +1,6 @@
 import { restApi } from "#main/config.js";
 
-import { showErrorMessages } from "#main/@shared/services/error-messages.js";
+import { showErrorMessages } from "#main/@shared/error-messages.js";
 import { get } from "#main/@shared/services/rest-api/service.js";
 
 export async function getUserById<R extends TUser>(

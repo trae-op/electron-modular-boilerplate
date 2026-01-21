@@ -1,6 +1,6 @@
 import { dialog } from "electron";
 
-import { logger } from "../logger.js";
+import { logger } from "./logger.js";
 
 type TParams = {
   title: string;

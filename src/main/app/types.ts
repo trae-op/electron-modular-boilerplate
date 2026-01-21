@@ -1,6 +1,7 @@
-import type { BrowserWindow } from "electron";
+import { type BrowserWindow } from "electron/main";
 
-import type { TItem } from "#main/@shared/tray/types.js";
+import type { TItem as TItemMenu } from "#main/@shared/menu/types.js";
+import type { TItem as TItemTray } from "#main/@shared/tray/types.js";
 
 export type TDestroyProcess = {
   error?: any;
@@ -9,26 +10,10 @@ export type TDestroyProcess = {
 };
 
 export type TMenuProvider = {
-  getMenu: () => TItem[];
-  buildMenu: (items?: TItem[]) => void;
+  collect: (window: BrowserWindow, items?: TItemMenu[]) => void;
 };
 
 export type TTrayProvider = {
-  getTray: () => TItem[];
-  buildTray: (items?: TItem[]) => void;
-  destroyTray: () => void;
-};
-
-export type TAuthProvider = {
-  checkAuthenticated: (
-    window: BrowserWindow,
-  ) => { isAuthenticated: boolean } | undefined;
-  setCheckAccessInterval: (window: BrowserWindow) => void;
-  logout: (window: BrowserWindow) => void;
-};
-
-export type TUpdaterProvider = {
-  setFeedUrl: () => void;
-  checkForUpdates: () => void;
-  controlUpdateWindowsPlatform: () => void;
+  collect: (window: BrowserWindow, items?: TItemTray[]) => void;
+  destroy: () => void;
 };

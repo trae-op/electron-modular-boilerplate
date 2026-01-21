@@ -4,9 +4,9 @@ import { messages } from "#main/config.js";
 
 import { cacheUser } from "#main/@shared/cache-responses.js";
 import { getWindow } from "#main/@shared/control-window/receive.js";
+import { showErrorMessages } from "#main/@shared/error-messages.js";
 import { sendToRenderer } from "#main/@shared/ipc/ipc.js";
 import { type TSendHandler } from "#main/@shared/ipc/types.js";
-import { showErrorMessages } from "#main/@shared/services/error-messages.js";
 import { logout } from "#main/@shared/services/logout.js";
 import { getElectronStorage, setElectronStorage } from "#main/@shared/store.js";
 

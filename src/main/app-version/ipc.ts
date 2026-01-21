@@ -1,13 +1,16 @@
 import { app } from "electron";
+import {
+  IpcHandler,
+  type TIpcHandlerInterface,
+} from "@devisfuture/electron-modular";
+import { ipcMainHandle } from "@shared/ipc/ipc.js";
 
-import type { TInvokeHandler } from "#main/@shared/ipc/types.js";
+@IpcHandler()
+export class AppVersionIpc implements TIpcHandlerInterface {
+  constructor() {}
 
-const currentVersion = app.getVersion();
-
-export const handleInvoke: TInvokeHandler = ({ payload }) => {
-  if (payload.type !== "getVersion") {
-    return undefined;
+  onInit() {
+    const currentVersion = app.getVersion();
+    ipcMainHandle("getVersion", () => currentVersion);
   }
-
-  return currentVersion;
-};
+}

@@ -2,7 +2,7 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import { restApi } from "../config.js";
 
-import { showErrorMessages } from "../@shared/services/error-messages.js";
+import { showErrorMessages } from "../@shared/error-messages.js";
 import { get } from "../@shared/services/rest-api/service.js";
 
 import { getUserById } from "./service.js";

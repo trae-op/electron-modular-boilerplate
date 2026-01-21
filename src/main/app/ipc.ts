@@ -6,17 +6,15 @@ import {
   IpcHandler,
   getWindow as getWindows,
 } from "@devisfuture/electron-modular";
-import { ipcMainOn } from "@shared/utils.js";
+import { ipcMainOn } from "@shared/ipc/ipc.js";
 import { AppService } from "./service.js";
 import { messages } from "../config.js";
-import { AUTH_PROVIDER } from "./tokens.js";
-import type { TAuthProvider, TDestroyProcess } from "./types.js";
+import type { TDestroyProcess } from "./types.js";
 
 @IpcHandler()
 export class AppIpc implements TIpcHandlerInterface {
   constructor(
     private appService: AppService,
-    @Inject(AUTH_PROVIDER) private authProvider: TAuthProvider,
   ) {
     process.on("uncaughtException", (error) => {
       this.destroyProcess({
@@ -61,7 +59,7 @@ export class AppIpc implements TIpcHandlerInterface {
     const mainWindow = getWindow("window:main");
     const window = await mainWindow.create();
 
-    ipcMainOn("closePreloadWindow", async () => {
+    ipcMainOn('windowClosePreload', async () => {
       const preloadAppWindow =
         getWindows<TWindows["preloadApp"]>("window:preload-app");
       if (preloadAppWindow !== undefined) {
@@ -70,12 +68,6 @@ export class AppIpc implements TIpcHandlerInterface {
 
       if (window !== undefined) {
         window.show();
-      }
-    });
-
-    ipcMainOn("logout", async () => {
-      if (window !== undefined) {
-        this.authProvider.logout(window);
       }
     });
   }

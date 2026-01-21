@@ -1,26 +1,15 @@
-import { getWindow } from "#main/@shared/control-window/receive.js";
-import { type TSendHandler } from "#main/@shared/ipc/types.js";
+import {
+  IpcHandler,
+  type TIpcHandlerInterface,
+  type TParamOnInit,
+} from "@devisfuture/electron-modular";
 
-import { openWindow } from "#main/app-preload/window.js";
+@IpcHandler()
+export class AppPreloadIpc implements TIpcHandlerInterface {
+  constructor() {}
 
-export const initializePreloadWindow = () => {
-  openWindow();
-};
-
-export const handlePreloadSend: TSendHandler = async ({ payload }) => {
-  if (payload.type !== "windowClosePreload") {
-    return;
+  onInit({ getWindow }: TParamOnInit<TWindows["preloadApp"]>) {
+    const mainWindow = getWindow("window:preload-app");
+    mainWindow.create();
   }
-
-  const mainWindow = getWindow<TWindows["main"]>("window:main");
-  const preloadAppWindow =
-    getWindow<TWindows["preloadApp"]>("window:preload-app");
-
-  if (preloadAppWindow !== undefined) {
-    preloadAppWindow.hide();
-  }
-
-  if (mainWindow !== undefined) {
-    mainWindow.show();
-  }
-};
+}

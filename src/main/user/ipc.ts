@@ -1,34 +1,36 @@
+import {
+  IpcHandler,
+  getWindow as getWindows,
+} from "@devisfuture/electron-modular";
+import { ipcMainOn } from "@shared/ipc/ipc.js";
+import { UserService } from "./service.js";
+import { getElectronStorage } from "@shared/store.js";
 import { cacheUser } from "#main/@shared/cache-responses.js";
-import { replyToRenderer } from "#main/@shared/ipc/ipc.js";
-import { type TSendHandler } from "#main/@shared/ipc/types.js";
-import { getElectronStorage } from "#main/@shared/store.js";
 
-import { getUserById } from "#main/user/service.js";
+@IpcHandler()
+export class UserIpc {
+  constructor(private userService: UserService) {}
 
-export const handleSend: TSendHandler = async ({ event, payload }) => {
-  if (payload.type !== "user") {
-    return;
-  }
+  onInit(): void {
+    ipcMainOn('user', async (event) => {
+      const userId = getElectronStorage("userId");
+      const getCacheUser = cacheUser(userId);
+      const mainWindow = getWindows<TWindows["main"]>("window:main");
 
-  const userId = getElectronStorage("userId");
-  const userFromCache = cacheUser(userId);
+      if (mainWindow !== undefined) {
+        if (getCacheUser !== undefined) {
+          event.reply("user", {
+            user: getCacheUser,
+          });
+        }
 
-  if (userFromCache !== undefined) {
-    replyToRenderer(event, {
-      type: "user",
-      data: {
-        user: userFromCache,
-      },
+        const user = userId ? await this.userService.byId(userId) : undefined;
+        if (user !== undefined) {
+          event.reply("user", {
+            user,
+          });
+        }
+      }
     });
   }
-
-  const user = userId ? await getUserById(userId) : undefined;
-  if (user !== undefined) {
-    replyToRenderer(event, {
-      type: "user",
-      data: {
-        user,
-      },
-    });
-  }
-};
+}

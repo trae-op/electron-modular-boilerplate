@@ -1,32 +1,57 @@
-import { app } from "electron";
+import { app, BrowserWindow } from "electron";
 import pkg from "electron-updater";
+import {
+  destroyWindows,
+  IpcHandler,
+  Inject,
+  type TIpcHandlerInterface,
+  type TParamOnInit,
+} from "@devisfuture/electron-modular";
+import { ipcMainOn } from "@shared/ipc/ipc.js";
+import { OpenLatestVersionService } from "./services/mac-os/open-latest-version.js";
 
-import { destroyWindows } from "#main/@shared/control-window/destroy.js";
-import { type TSendHandler } from "#main/@shared/ipc/types.js";
-import { destroyTray } from "#main/@shared/tray/tray.js";
-
-import { checkForUpdates } from "#main/updater/services/checkForUpdates.js";
-import { openLatestVersion } from "#main/updater/services/mac/openLatestVersion.js";
+import { UPDATER_TRAY_PROVIDER } from "./tokens.js";
+import type { TTrayProvider } from "./types.js";
 
 const { autoUpdater } = pkg;
 
-export const handleSend: TSendHandler = ({ payload }) => {
-  const { type, data } = payload;
+@IpcHandler()
+export class UpdaterIpc implements TIpcHandlerInterface {
+  private updateAppWindow: BrowserWindow | undefined = undefined;
 
-  if (type === "restart") {
-    autoUpdater.quitAndInstall();
-    return;
-  }
+  constructor(
+    @Inject(UPDATER_TRAY_PROVIDER) private trayProvider: TTrayProvider,
+    private openLatestVersionService: OpenLatestVersionService,
+  ) {}
 
-  if (type === "checkForUpdates") {
-    checkForUpdates();
-    return;
-  }
+  onInit({ getWindow }: TParamOnInit<TWindows["updateApp"]>) {
+    const updateAppWindow = getWindow("window:update-app");
 
-  if (type === "openLatestVersion" && data && "updateFile" in data) {
-    openLatestVersion(data.updateFile);
-    destroyTray();
-    destroyWindows();
-    app.quit();
+    this.trayProvider.collect(
+      this.trayProvider.getMenu().map((item) => {
+        if (item.name === "check-update") {
+          item.click = async () => {
+            if (this.updateAppWindow) {
+              this.updateAppWindow.show();
+            } else {
+              this.updateAppWindow = await updateAppWindow.create();
+            }
+          };
+        }
+
+        return item;
+      }),
+    );
+
+    ipcMainOn("restart", () => {
+      autoUpdater.quitAndInstall();
+    });
+
+    ipcMainOn("openLatestVersion", (_, { updateFile }) => {
+      this.openLatestVersionService.openLatestVersion(updateFile);
+      this.trayProvider.destroy();
+      destroyWindows();
+      app.quit();
+    });
   }
-};
+}

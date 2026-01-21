@@ -8,7 +8,7 @@ export class AppService {
   constructor(@Inject(TRAY_PROVIDER) private trayProvider: TTrayProvider) {}
 
   destroyTrayAndWindows(): void {
-    this.trayProvider.destroyTray();
+    this.trayProvider.destroy();
     const preloadAppWindow =
       getWindow<TWindows["preloadApp"]>("window:preload-app");
 

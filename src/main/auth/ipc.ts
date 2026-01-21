@@ -1,92 +1,46 @@
-import { type Event, type WebContentsWillRedirectEventParams } from "electron";
-
-import { messages } from "#main/config.js";
-
+import { session } from "electron";
+import { restApi } from "../config.js";
+import { IpcHandler, getWindow as getWindows, type TParamOnInit } from "@devisfuture/electron-modular";
+import { ipcMainOn, ipcWebContentsSend } from "@shared/ipc/ipc.js";
+import type { AuthService } from "./service.js";
+import { getElectronStorage } from "#main/@shared/store.js";
 import { cacheUser } from "#main/@shared/cache-responses.js";
-import { getWindow } from "#main/@shared/control-window/receive.js";
-import { showErrorMessages } from "#main/@shared/error-messages.js";
-import { sendToRenderer } from "#main/@shared/ipc/ipc.js";
-import { type TSendHandler } from "#main/@shared/ipc/types.js";
-import { logout } from "#main/@shared/services/logout.js";
-import { getElectronStorage, setElectronStorage } from "#main/@shared/store.js";
 
-import { openWindow } from "#main/auth/window.js";
+@IpcHandler()
+export class AuthIpc {
+  constructor(private authProvider: AuthService) {}
 
-export const handleSend: TSendHandler = ({ payload }) => {
-  const { type, data } = payload;
+  onInit({ getWindow }: TParamOnInit<TWindows['auth']>): void {
+    const authWindow = getWindow('window:auth');
+    const mainWindow = getWindows("window:main");
+    const authSession = session.fromPartition("persist:auth");
 
-  if (type === "logout") {
-    logout();
-    return;
-  }
-
-  if (type === "checkAuth") {
-    const mainWindow = getWindow<TWindows["main"]>("window:main");
-    const userId = getElectronStorage("userId");
-    const userFromCache = cacheUser(userId);
-
-    if (mainWindow !== undefined) {
-      sendToRenderer(mainWindow.webContents, {
-        type: "auth",
-        data: {
-          isAuthenticated: Boolean(userFromCache),
+    ipcMainOn('windowAuth', async (_, { provider }) => {
+      authWindow.create({
+        loadURL: `${restApi.urls.base}${restApi.urls.baseApi}${restApi.urls.auth.base}${restApi.urls.auth[provider]}`,
+        options: {
+          webPreferences: {
+            session: authSession,
+          },
         },
       });
-    }
+    });
 
-    return;
-  }
+    ipcMainOn('checkAuth', () => {
+      const userId = getElectronStorage("userId");
+      const userFromCache = cacheUser(userId);
 
-  if (type !== "windowAuth" || data === undefined || !("provider" in data)) {
-    return;
-  }
-
-  const window = openWindow(data.provider);
-  const mainWindow = getWindow<TWindows["main"]>("window:main");
-
-  window.webContents.on(
-    "will-redirect",
-    async (_: Event<WebContentsWillRedirectEventParams>, url: string) => {
-      const isVerify = /api\/auth\/verify\?token\=/g.test(url);
-      const isUserExists = /api\/auth\/user\-exists\?message\=/g.test(url);
-      const callBackUrl = new URL(url);
-      const searchParams = new URLSearchParams(callBackUrl.search);
-
-      if (isUserExists) {
-        window.close();
-        const message = searchParams.get("message");
-        const email = searchParams.get("email");
-
-        if (message !== null && email !== null) {
-          showErrorMessages({
-            title: messages.auth.userAlreadyExists,
-            body: `${message}\nEmail: ${email}`,
-          });
-        }
+      if (mainWindow !== undefined) {
+        ipcWebContentsSend('auth', mainWindow.webContents, {
+          isAuthenticated: Boolean(userFromCache),
+        });
       }
+    });
 
-      if (isVerify) {
-        const token = searchParams.get("token");
-        const userId = searchParams.get("userId");
-
-        if (token !== null && userId !== null && mainWindow !== undefined) {
-          setElectronStorage("authToken", token);
-          setElectronStorage("userId", userId);
-          sendToRenderer(mainWindow.webContents, {
-            type: "auth",
-            data: {
-              isAuthenticated: true,
-            },
-          });
-        } else {
-          showErrorMessages({
-            title: messages.auth.errorTokenUserMissing,
-            body: `Token=${token}\nUserId: ${userId}`,
-          });
-        }
-
-        window.close();
+    ipcMainOn("logout", () => {
+      if (mainWindow !== undefined) {
+        this.authProvider.logout(mainWindow);
       }
-    },
-  );
-};
+    });
+  }
+}

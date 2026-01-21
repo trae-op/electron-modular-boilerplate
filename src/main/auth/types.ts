@@ -1,6 +1,8 @@
-import { restApi } from "../config.js";
+import type { ApiResponse, RequestOptions } from "../rest-api/types.js";
 
-export type TProvidersIpc = {
-  getUserById: <R extends TUser>(id: string) => Promise<R | undefined>;
+export type TAuthRestApiProvider = {
+  get: <TResponse>(
+    endpoint: string,
+    options?: RequestOptions
+  ) => Promise<ApiResponse<TResponse>>;
 };
-export type TLessProviders = typeof restApi.urls.auth;

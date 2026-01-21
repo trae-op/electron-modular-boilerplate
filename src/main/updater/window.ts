@@ -1,43 +1,34 @@
-import { createWindow } from "#main/@shared/control-window/create.js";
-import { setStore } from "#main/@shared/store.js";
+import { WindowManager } from "@devisfuture/electron-modular";
+import type { TWindowManager } from "../types.js";
+import { CheckForUpdatesService } from "./services/check-for-updates.js";
 
-import { checkForUpdates } from "#main/updater/services/checkForUpdates.js";
+@WindowManager<TWindows["updateApp"]>({
+  hash: "window:update-app",
+  isCache: true,
+  options: {
+    width: 365,
+    height: 365,
+    alwaysOnTop: true,
+    autoHideMenuBar: true,
+    minimizable: false,
+    maximizable: false,
+    title: "",
+  },
+})
+export class UpdaterWindow implements TWindowManager {
+  private isCheckFirst = true;
+  constructor(private checkForUpdatesService: CheckForUpdatesService) {}
 
-let isCheckFirst = true;
-let isEvents = true;
+  onWebContentsDidFinishLoad(): void {
+    if (this.isCheckFirst) {
+      this.checkForUpdatesService.checkForUpdates();
+      this.isCheckFirst = false;
+    }
+  }
 
-export function openWindow(): void {
-  const window = createWindow<TWindows["updateApp"]>({
-    hash: "window:update-app",
-    isCache: true,
-    options: {
-      width: 340,
-      height: 340,
-      alwaysOnTop: true,
-      autoHideMenuBar: true,
-      minimizable: false,
-      maximizable: false,
-      title: "",
-    },
-  });
-
-  if (isEvents) {
-    isEvents = false;
-    window.webContents.on("did-finish-load", () => {
-      setStore("updateWindow", window);
-
-      if (isCheckFirst) {
-        checkForUpdates();
-        isCheckFirst = false;
-      }
-    });
-
-    window.on("show", () => {
-      setStore("updateWindow", window);
-
-      if (!isCheckFirst) {
-        checkForUpdates();
-      }
-    });
+  onShow() {
+    if (!this.isCheckFirst) {
+      this.checkForUpdatesService.checkForUpdates();
+    }
   }
 }

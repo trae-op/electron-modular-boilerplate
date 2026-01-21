@@ -6,7 +6,7 @@ import {
   IpcHandler,
   getWindow as getWindows,
 } from "@devisfuture/electron-modular";
-import { ipcMainOn } from "@shared/ipc/ipc.js";
+import { ipcMainOn } from "#shared/ipc/ipc.js";
 import { AppService } from "./service.js";
 import { messages } from "../config.js";
 import type { TDestroyProcess } from "./types.js";

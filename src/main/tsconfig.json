@@ -10,7 +10,8 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "paths": {
-      "#main/*": ["./*"]
+      "#main/*": ["./*"],
+      "#shared/*": ["./@shared/*"]
     }
   },
   "include": [".", "../../types/*.d.ts"]

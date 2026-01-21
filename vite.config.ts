@@ -31,10 +31,7 @@ export default defineConfig({
       "@conceptions": path.resolve(__dirname, "src/renderer/conceptions"),
       "@components": path.resolve(__dirname, "src/renderer/components"),
       "@composites": path.resolve(__dirname, "src/renderer/composites"),
-      "@shared": path.resolve(__dirname, "src/renderer/shared"),
       "@config": path.resolve(__dirname, "src/renderer/config"),
-      "#main": path.resolve(__dirname, "src/main"),
-      "#main/": path.resolve(__dirname, "src/main/"),
     },
   },
 });

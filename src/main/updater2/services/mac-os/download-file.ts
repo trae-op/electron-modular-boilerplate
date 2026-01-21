@@ -3,7 +3,7 @@ import path from "node:path";
 import fs from "node:fs";
 import { Injectable } from "@devisfuture/electron-modular";
 import type { TOptionsDownloadFile } from "./types.js";
-import { folders, restApi } from "../../../config.js";
+import { folders, restApi } from "#main/config.js";
 import { CreateLatestVersionFolderService } from "./create-latest-version-folder.js";
 
 @Injectable()

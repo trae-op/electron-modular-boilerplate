@@ -13,8 +13,8 @@ import { OpenLatestVersionService } from "./services/mac-os/open-latest-version.
 import { UpdaterIpc } from "./ipc.js";
 import { TrayModule } from "#main/tray/module.js";
 import { TrayService } from "#main/tray/service.js";
-import { NotificationModule } from "../notification/module.js";
-import { NotificationService } from "../notification/service.js";
+import { NotificationModule } from "#main/notification/module.js";
+import { NotificationService } from "#main/notification/service.js";
 import { UpdaterWindow } from "./window.js";
 import {
   UPDATER_NOTIFICATION_PROVIDER,
@@ -45,7 +45,7 @@ import type {
       provide: UPDATER_TRAY_PROVIDER,
       useFactory: (trayService: TrayService): TTrayProvider => ({
         getMenu: () => trayService.getMenu(),
-        collect: (window, items) => trayService.collect(window, items),
+        collect: (items) => trayService.collect(items),
         destroy: () => trayService.destroy(),
       }),
       inject: [TrayService],

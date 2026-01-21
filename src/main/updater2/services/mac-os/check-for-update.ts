@@ -3,7 +3,7 @@ import path from "node:path";
 import { compareVersions } from "compare-versions";
 import { Injectable } from "@devisfuture/electron-modular";
 import { TOptionsUpdater } from "./types.js";
-import { folders, messages, restApi } from "../../../config.js";
+import { folders, messages, restApi } from "#main/config.js";
 import { VerifyService } from "./verify.js";
 import { DownloadFileService } from "./download-file.js";
 

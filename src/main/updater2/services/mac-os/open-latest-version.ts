@@ -1,8 +1,8 @@
 import { app, shell } from "electron";
 import path from "node:path";
 import { Injectable } from "@devisfuture/electron-modular";
+import { folders, messages } from "#main/config.js";
 import type { TPromiseOpenFolder } from "./types.js";
-import { folders, messages } from "../../../config.js";
 
 @Injectable()
 export class OpenLatestVersionService {

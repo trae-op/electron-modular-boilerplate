@@ -11,6 +11,8 @@ import { AppPreloadModule } from "#main/app-preload2/module.js";
 import { AppVersionModule } from "#main/app-version/module.js";
 import { AppModule } from "#main/app/module.js";
 import { AuthModule } from "#main/auth2/module.js";
+import { NotificationModule } from "#main/notification/module.js";
+import { UpdaterModule } from "#main/updater2/module.js";
 import { UserModule } from "#main/user2/module.js";
 
 const envPath = path.join(process.resourcesPath, ".env");
@@ -36,6 +38,8 @@ app.on("ready", async () => {
     AppModule,
     AuthModule,
     UserModule,
+    NotificationModule,
+    UpdaterModule,
     AppVersionModule,
   ]);
 });

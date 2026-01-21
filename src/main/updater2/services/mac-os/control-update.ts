@@ -1,8 +1,8 @@
 import { Injectable, Inject } from "@devisfuture/electron-modular";
-import { messages } from "../../../config.js";
+import { messages } from "#main/config.js";
 import { CheckForUpdateService } from "./check-for-update.js";
 import { SendUpdateInfoService } from "../send-update-info.js";
-import { setStore } from "../../../$shared/store.js";
+import { setStore } from "@shared/store.js";
 import { UPDATER_NOTIFICATION_PROVIDER } from "../../tokens.js";
 import type { TUpdaterNotificationProvider } from "../../types.js";
 

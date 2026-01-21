@@ -1,7 +1,6 @@
 import { type BrowserWindow } from "electron/main";
 
-import type { TItem as TItemMenu } from "#main/@shared/menu/types.js";
-import type { TItem as TItemTray } from "#main/@shared/tray/types.js";
+import type { TMenuItem } from "#main/types.js";
 
 export type TDestroyProcess = {
   error?: any;
@@ -10,10 +9,10 @@ export type TDestroyProcess = {
 };
 
 export type TMenuProvider = {
-  collect: (window: BrowserWindow, items?: TItemMenu[]) => void;
+  collect: (window: BrowserWindow, items?: TMenuItem[]) => void;
 };
 
 export type TTrayProvider = {
-  collect: (window: BrowserWindow, items?: TItemTray[]) => void;
+  collect: (window: BrowserWindow, items?: TMenuItem[]) => void;
   destroy: () => void;
 };

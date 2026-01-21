@@ -4,9 +4,9 @@ import { icons, menu } from "../config.js";
 import { Injectable } from "@devisfuture/electron-modular";
 import { isDev, isPlatform } from "@shared/utils.js";
 import { getAssetsPath } from "@shared/path-resolver.js";
-import type { TItem } from "#main/@shared/tray/types.js";
+import type { TMenuItem } from "#main/types.js";
 
-const defaultMenu: TItem[] = [
+const defaultMenu: TMenuItem[] = [
   {
     label: menu.labels.showApp,
     name: "show",
@@ -28,7 +28,7 @@ let tray: Tray | undefined = undefined;
 export class TrayService {
   constructor() {}
 
-  collect(window: BrowserWindow, items?: TItem[]): void {
+  collect(window: BrowserWindow, items?: TMenuItem[]): void {
     const menuItems = items !== undefined ? items : defaultMenu;
     this.build(menuItems.map((item) => {
       if (item.name === "show") {
@@ -47,7 +47,7 @@ export class TrayService {
     }));
   }
 
-  private build(items?: TItem[]): void {
+  private build(items?: TMenuItem[]): void {
     if (tray === undefined) {
       tray = new Tray(
         path.join(

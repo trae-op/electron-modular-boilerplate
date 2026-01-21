@@ -2,9 +2,9 @@ import { app, Menu, type BrowserWindow } from "electron";
 import { menu } from "../config.js";
 import { Injectable } from "@devisfuture/electron-modular";
 import { isPlatform } from "@shared/utils.js";
-import type { TItem } from "./types.js";
+import type { TMenuItem } from "#main/types.js";
 
-const defaultMenu: TItem[] = [
+const defaultMenu: TMenuItem[] = [
   {
     label: isPlatform("darwin") ? undefined : menu.labels.app,
     name: "app",
@@ -38,7 +38,7 @@ const defaultMenu: TItem[] = [
 export class MenuService {
   constructor() {}
 
-  collectMenu(window: BrowserWindow, items?: TItem[]): void {
+  collectMenu(window: BrowserWindow, items?: TMenuItem[]): void {
     const menuItems = items !== undefined ? items : defaultMenu;
     this.build(menuItems.map((item) => {
       if (item.name === "app") {
@@ -57,7 +57,7 @@ export class MenuService {
     }));
   }
 
-  private build(items?: TItem[]): void {
+  private build(items?: TMenuItem[]): void {
     Menu.setApplicationMenu(
       Menu.buildFromTemplate(items !== undefined ? items : defaultMenu),
     );

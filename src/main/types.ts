@@ -1,6 +1,8 @@
 import type {
   BrowserWindow,
   Event,
+  MenuItem,
+  MenuItemConstructorOptions,
   WebContentsWillRedirectEventParams,
 } from "electron";
 
@@ -20,3 +22,10 @@ export type TWindowManager = {
     window: BrowserWindow,
   ) => void;
 };
+
+type TNameMenu = {
+  name: "check-update" | "show" | "quit" | "app" | "edit";
+};
+type TMenuItemConstructorOptions = MenuItemConstructorOptions & TNameMenu;
+
+export type TMenuItem = TMenuItemConstructorOptions | (MenuItem & TNameMenu);

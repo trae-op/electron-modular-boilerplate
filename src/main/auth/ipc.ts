@@ -20,12 +20,6 @@ export class AuthIpc {
       authWindow.create({
         loadURL: `${restApi.urls.base}${restApi.urls.baseApi}${restApi.urls.auth.base}${restApi.urls.auth[provider]}`,
         options: {
-          autoHideMenuBar: true,
-          minimizable: false,
-          maximizable: false,
-          title: "",
-          width: 400,
-          height: 400,
           webPreferences: {
             session: authSession,
           },

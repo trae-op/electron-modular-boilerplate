@@ -7,7 +7,8 @@
   "author": "traeop",
   "description": "A production-ready Electron starter template featuring React, Tailwind CSS, and a modular architecture via @devisfuture/electron-modular. Includes pre-configured authentication and auto-update logic.",
   "imports": {
-    "#main/*": "./dist-main/*"
+    "#main/*": "./dist-main/*",
+    "#shared/*": "./dist-main/@shared/*"
   },
   "scripts": {
     "dev": "npm-run-all --parallel dev:react dev:electron",

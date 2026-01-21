@@ -70,7 +70,7 @@ export class AuthWindow implements TWindowManager {
         });
       }
 
-      window.close();
+      this.window?.close();
     }
   }
 }

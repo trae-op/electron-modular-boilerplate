@@ -7,11 +7,11 @@ import {
   type TIpcHandlerInterface,
   type TParamOnInit,
 } from "@devisfuture/electron-modular";
-import { ipcMainOn } from "../$shared/utils.js";
+import { ipcMainOn } from "@shared/ipc/ipc.js";
 import { OpenLatestVersionService } from "./services/mac-os/open-latest-version.js";
 
 import { UPDATER_TRAY_PROVIDER } from "./tokens.js";
-import type { TUpdaterTrayProvider } from "./types.js";
+import type { TTrayProvider } from "./types.js";
 
 const { autoUpdater } = pkg;
 
@@ -20,15 +20,15 @@ export class UpdaterIpc implements TIpcHandlerInterface {
   private updateAppWindow: BrowserWindow | undefined = undefined;
 
   constructor(
-    @Inject(UPDATER_TRAY_PROVIDER) private trayProvider: TUpdaterTrayProvider,
+    @Inject(UPDATER_TRAY_PROVIDER) private trayProvider: TTrayProvider,
     private openLatestVersionService: OpenLatestVersionService,
   ) {}
 
   onInit({ getWindow }: TParamOnInit<TWindows["updateApp"]>) {
     const updateAppWindow = getWindow("window:update-app");
 
-    this.trayProvider.buildTray(
-      this.trayProvider.getTray().map((item) => {
+    this.trayProvider.collect(
+      this.trayProvider.getMenu().map((item) => {
         if (item.name === "check-update") {
           item.click = async () => {
             if (this.updateAppWindow) {
@@ -49,7 +49,7 @@ export class UpdaterIpc implements TIpcHandlerInterface {
 
     ipcMainOn("openLatestVersion", (_, { updateFile }) => {
       this.openLatestVersionService.openLatestVersion(updateFile);
-      this.trayProvider.destroyTray();
+      this.trayProvider.destroy();
       destroyWindows();
       app.quit();
     });

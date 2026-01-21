@@ -11,8 +11,8 @@ import { CheckForUpdatesService } from "./services/check-for-updates.js";
 import { SetFeedUrlService } from "./services/windows/set-feed-url.js";
 import { OpenLatestVersionService } from "./services/mac-os/open-latest-version.js";
 import { UpdaterIpc } from "./ipc.js";
-import { TrayModule } from "../tray/module.js";
-import { TrayService } from "../tray/service.js";
+import { TrayModule } from "#main/tray/module.js";
+import { TrayService } from "#main/tray/service.js";
 import { NotificationModule } from "../notification/module.js";
 import { NotificationService } from "../notification/service.js";
 import { UpdaterWindow } from "./window.js";
@@ -21,8 +21,8 @@ import {
   UPDATER_TRAY_PROVIDER,
 } from "./tokens.js";
 import type {
+  TTrayProvider,
   TUpdaterNotificationProvider,
-  TUpdaterTrayProvider,
 } from "./types.js";
 
 @RgModule({
@@ -43,10 +43,10 @@ import type {
     ControlUpdateWindowsPlatformService,
     {
       provide: UPDATER_TRAY_PROVIDER,
-      useFactory: (trayService: TrayService): TUpdaterTrayProvider => ({
-        getTray: () => trayService.trayMenu,
-        buildTray: (items) => trayService.buildTray(items),
-        destroyTray: () => trayService.destroyTray(),
+      useFactory: (trayService: TrayService): TTrayProvider => ({
+        getMenu: () => trayService.getMenu(),
+        collect: (window, items) => trayService.collect(window, items),
+        destroy: () => trayService.destroy(),
       }),
       inject: [TrayService],
     },

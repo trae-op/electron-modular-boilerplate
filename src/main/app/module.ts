@@ -27,14 +27,16 @@ import type {
     {
       provide: MENU_PROVIDER,
       useFactory: (menuService: MenuService): TMenuProvider => ({
-        collect: (window, items) => menuService.collectMenu(window, items),
+        getMenu: () => menuService.getMenu(),
+        collect: (items) => menuService.collectMenu(items),
       }),
       inject: [MenuService],
     },
     {
       provide: TRAY_PROVIDER,
       useFactory: (trayService: TrayService): TTrayProvider => ({
-        collect: (window, items) => trayService.collect(window, items),
+        getMenu: () => trayService.getMenu(),
+        collect: (items) => trayService.collect(items),
         destroy: () => trayService.destroy(),
       }),
       inject: [TrayService],

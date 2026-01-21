@@ -14,6 +14,7 @@ import type {
   TMenuProvider,
   TTrayProvider,
 } from "./types.js";
+import { menu } from "#main/config.js";
 
 @WindowManager<TWindows["main"]>({
   hash: "window:main",
@@ -41,8 +42,39 @@ export class AppWindow implements TWindowManager {
   }
 
   onWebContentsDidFinishLoad(window: BrowserWindow): void {
-    this.menuProvider.collect(window);
-    this.trayProvider.collect(window);
+    this.menuProvider.collect(this.menuProvider.getMenu().map((item) => {
+      if (item.name === "app") {
+        item.submenu = [
+          {
+            label: menu.labels.devTools,
+            click: () => window.webContents.openDevTools(),
+          },
+          {
+            label: menu.labels.quit,
+            click: () => app.quit(),
+          },
+        ];
+      }
+      return item;
+    }));
+
+    this.trayProvider.collect(this.trayProvider.getMenu().map((item) => {
+      if (item.name === "show") {
+        item.click = () => {
+          window.show();
+          if (app.dock) {
+            app.dock.show();
+          }
+        };
+      }
+
+      if (item.name === "quit") {
+        item.click = () => app.quit();
+      }
+      return item;
+    }));
+
+       
   }
 
   onShow(): void {

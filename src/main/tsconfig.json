@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "typeRoots": ["../../types", "../../node_modules/@types"],
+    "target": "ESNext",
+    "module": "NodeNext",
+    "skipLibCheck": true,
+    "strict": true,
+    "outDir": "../../dist-main",
+    "baseUrl": ".",
+    "paths": {
+      "#main/*": ["./*"]
+    }
+  },
+  "include": [".", "../../types/*.d.ts"]
+}

@@ -1,0 +1,3 @@
+type TAuth = {
+  isAuthenticated: boolean;
+};

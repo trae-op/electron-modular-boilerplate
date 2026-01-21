@@ -1,0 +1,41 @@
+{
+  "appId": "com.myself.boilerplate",
+  "files": ["dist-main", "dist-renderer"],
+  "extraResources": [
+    "dist-main/preload.cjs",
+    "src/assets/**",
+    {
+      "from": ".env.production",
+      "to": ".env"
+    },
+    {
+      "from": "./src/main/app-preload/spinner.html",
+      "to": "dist-main/spinner.html"
+    }
+  ],
+  "mac": {
+    "target": "dmg",
+    "icon": "./src/assets/512x512.png",
+    "identity": null
+  },
+  "linux": {
+    "target": "AppImage",
+    "category": "Utility"
+  },
+  "win": {
+    "target": "nsis",
+    "icon": "./src/assets/256x256.png"
+  },
+  "nsis": {
+    "oneClick": false,
+    "allowToChangeInstallationDirectory": true
+  },
+  "publish": [
+    {
+      "provider": "github",
+      "owner": "trae-op",
+      "repo": "electron-modular-boilerplate",
+      "releaseType": "release"
+    }
+  ]
+}

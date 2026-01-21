@@ -1,12 +1,6 @@
 {
   "github.copilot.chat.codeGeneration.instructions": [
     {
-      "file": "./docs/main-process-unit-tests.md"
-    },
-    {
-      "file": "./docs/renderer-process-unit-tests.md"
-    },
-    {
       "file": "./docs/typescript.md"
     },
     {
@@ -14,42 +8,6 @@
     },
     {
       "file": "./docs/javascript.md"
-    },
-    {
-      "file": "./docs/react.md"
-    },
-    {
-      "file": "./docs/main-process-architecture.md"
-    },
-    {
-      "file": "./docs/renderer-process-architecture.md"
-    },
-    {
-      "file": "./docs/tailwind-css.md"
-    },
-    {
-      "file": "./docs/ipc-communication.md"
-    },
-    {
-      "file": "./docs/lucide-react.md"
-    },
-    {
-      "file": "./docs/clsx-tailwind.md"
-    },
-    {
-      "file": "./docs/event-delegation-guide.md"
-    },
-    {
-      "file": "./docs/react-form-instructions.md"
-    },
-    {
-      "file": "./docs/electron-path-aliasing.md"
-    },
-    {
-      "file": "./docs/test-task.md"
-    },
-    {
-      "file": "./docs/best-practices.md"
     }
   ],
   "github.copilot.chat.commitMessageGeneration.instructions": [

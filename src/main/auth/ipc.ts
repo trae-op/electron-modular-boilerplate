@@ -2,7 +2,7 @@ import { session } from "electron";
 import { restApi } from "../config.js";
 import { IpcHandler, getWindow as getWindows, type TParamOnInit } from "@devisfuture/electron-modular";
 import { ipcMainOn, ipcWebContentsSend } from "#shared/ipc/ipc.js";
-import type { AuthService } from "./service.js";
+import { AuthService } from "./service.js";
 import { getElectronStorage } from "#shared/store.js";
 import { cacheUser } from "#shared/cache-responses.js";
 

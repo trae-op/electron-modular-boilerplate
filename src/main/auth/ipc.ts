@@ -16,9 +16,16 @@ export class AuthIpc {
     const authSession = session.fromPartition("persist:auth");
 
     ipcMainOn('windowAuth', async (_, { provider }) => {
+      console.log("AuthIpc - windowAuth - provider:", `${restApi.urls.base}${restApi.urls.baseApi}${restApi.urls.auth.base}${restApi.urls.auth[provider]}`);
       authWindow.create({
         loadURL: `${restApi.urls.base}${restApi.urls.baseApi}${restApi.urls.auth.base}${restApi.urls.auth[provider]}`,
         options: {
+          autoHideMenuBar: true,
+          minimizable: false,
+          maximizable: false,
+          title: "",
+          width: 400,
+          height: 400,
           webPreferences: {
             session: authSession,
           },

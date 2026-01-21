@@ -10,9 +10,7 @@ export const useClosePreloadWindow = (currentPathname: string) => {
       : `/${currentPathname}`;
 
     if (normalizedParam === pathname) {
-      window.electron.send({
-        type: "windowClosePreload",
-      });
+      window.electron.send("windowClosePreload");
     }
   }, [currentPathname, pathname]);
 };

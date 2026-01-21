@@ -24,7 +24,7 @@ Menu.setApplicationMenu(null);
 const source = process.env.BASE_REST_API;
 initSettings({
   cspConnectSources: source ? [source] : [],
-  localhostPort: process.env.LOCALHOST_ELECTRON_SERVER_PORT ?? "",
+  localhostPort: process.env.LOCALHOST_PORT ?? "",
   folders: {
     distRenderer: folders.distRenderer,
     distMain: folders.distMain,

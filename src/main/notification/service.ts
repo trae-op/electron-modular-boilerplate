@@ -1,7 +1,7 @@
 import { getAssetsPath } from "#shared/path-resolver.js";
+import { joinPosixPath } from "#shared/utils.js";
 import { Injectable } from "@devisfuture/electron-modular";
 import { Notification, type NotificationConstructorOptions } from "electron";
-import path from "node:path";
 
 import { icons } from "../config.js";
 
@@ -13,7 +13,7 @@ export class NotificationService {
 
   initNotification(): void {
     notification = new Notification({
-      icon: path.join(getAssetsPath(), icons.notificationIcon),
+      icon: joinPosixPath(getAssetsPath(), icons.notificationIcon),
     });
   }
 

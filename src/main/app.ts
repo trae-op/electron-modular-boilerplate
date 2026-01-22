@@ -14,7 +14,10 @@ import { NotificationModule } from "#main/notification/module.js";
 import { UpdaterModule } from "#main/updater/module.js";
 import { UserModule } from "#main/user/module.js";
 
-const envPath = path.join(process.resourcesPath, ".env");
+const envPath = path.join(
+  process.env.RESOURCES_PATH ?? process.resourcesPath,
+  ".env",
+);
 dotenv.config(!isDev() ? { path: envPath } : undefined);
 
 app.disableHardwareAcceleration();

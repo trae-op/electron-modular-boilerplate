@@ -1,6 +1,6 @@
+import { joinPosixPath } from "#shared/utils.js";
 import { Injectable } from "@devisfuture/electron-modular";
 import { app, shell } from "electron";
-import path from "node:path";
 
 import { folders, messages } from "#main/config.js";
 
@@ -33,7 +33,11 @@ export class OpenLatestVersionService {
   }
 
   openLatestVersion(updateFile: string): void {
-    const folderPath = path.join(app.getPath("downloads"), folders.download);
-    this.openFolder(folderPath + "/" + updateFile);
+    const updatePath = joinPosixPath(
+      app.getPath("downloads"),
+      folders.download,
+      updateFile,
+    );
+    this.openFolder(updatePath);
   }
 }

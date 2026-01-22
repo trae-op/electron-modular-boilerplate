@@ -6,9 +6,15 @@ vi.mock("electron", () => ({
   },
 }));
 
-vi.mock("./utils.js", () => ({
-  isDev: vi.fn(() => false),
-}));
+vi.mock("./utils.js", async () => {
+  const actual =
+    await vi.importActual<typeof import("./utils.js")>("./utils.js");
+
+  return {
+    ...actual,
+    isDev: vi.fn(() => false),
+  };
+});
 
 describe("@shared/path-resolver", () => {
   it("resolves preload path for production", async () => {

@@ -1,1 +1,1 @@
-process.resourcesPath = process.resourcesPath ?? process.cwd();
+process.env.RESOURCES_PATH = process.env.RESOURCES_PATH ?? process.cwd();

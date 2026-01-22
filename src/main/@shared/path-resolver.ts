@@ -3,23 +3,21 @@ import path from "node:path";
 
 import { folders } from "../config.js";
 
-import { isDev } from "./utils.js";
+import { isDev, joinPosixPath } from "./utils.js";
 
 export function getPreloadPath() {
-  return path.join(
+  return joinPosixPath(
     app.getAppPath(),
     isDev() ? "." : "..",
-    "/" + folders.distMain + "/preload.cjs",
+    folders.distMain,
+    "preload.cjs",
   );
 }
 
 export function getUIPath() {
-  return path.join(
-    app.getAppPath(),
-    "/" + folders.distRenderer + "/index.html",
-  );
+  return joinPosixPath(app.getAppPath(), folders.distRenderer, "index.html");
 }
 
 export function getAssetsPath() {
-  return path.join(app.getAppPath(), isDev() ? "." : "..", "src/assets");
+  return joinPosixPath(app.getAppPath(), isDev() ? "." : "..", "src", "assets");
 }

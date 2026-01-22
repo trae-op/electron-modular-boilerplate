@@ -2,7 +2,10 @@ import { isDev } from "#shared/utils.js";
 import dotenv from "dotenv";
 import path from "node:path";
 
-const envPath = path.join(process.resourcesPath, ".env");
+const envPath = path.join(
+  process.env.RESOURCES_PATH ?? process.resourcesPath,
+  ".env",
+);
 dotenv.config(!isDev() ? { path: envPath } : undefined);
 
 export const appName = "Electron React Auth Updater";

@@ -22,7 +22,7 @@ import { menu } from "#main/config.js";
   options: {
     resizable: isDev(),
     show: false,
-    width: 350,
+    width: 500,
     height: 500,
   },
 })

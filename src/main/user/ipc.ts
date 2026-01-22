@@ -1,10 +1,11 @@
-import { cacheUser } from "#shared/cache-responses.js";
 import { ipcMainOn } from "#shared/ipc/ipc.js";
 import { getElectronStorage } from "#shared/store.js";
 import {
   IpcHandler,
   getWindow as getWindows,
 } from "@devisfuture/electron-modular";
+
+import { cacheUser } from "#main/cache-responses.js";
 
 import { UserService } from "./service.js";
 

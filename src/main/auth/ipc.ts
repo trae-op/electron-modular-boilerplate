@@ -1,4 +1,3 @@
-import { cacheUser } from "#shared/cache-responses.js";
 import { ipcMainOn, ipcWebContentsSend } from "#shared/ipc/ipc.js";
 import { getElectronStorage } from "#shared/store.js";
 import {
@@ -8,6 +7,8 @@ import {
 } from "@devisfuture/electron-modular";
 
 import { restApi } from "../config.js";
+
+import { cacheUser } from "#main/cache-responses.js";
 
 import { AuthService } from "./service.js";
 

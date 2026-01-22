@@ -1,6 +1,6 @@
-import { restApi } from "../config.js";
+import { getElectronStorage } from "#shared/store.js";
 
-import { getElectronStorage } from "./store.js";
+import { restApi } from "./config.js";
 
 export function cacheUser(userId: string | undefined): TUser | undefined {
   let user: TUser | undefined = undefined;

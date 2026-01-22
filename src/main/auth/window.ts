@@ -20,6 +20,9 @@ import { showErrorMessages } from "#shared/error-messages.js";
     title: "",
     width: 400,
     height: 400,
+    webPreferences: {
+      sandbox: true,
+    },
   },
 })
 export class AuthWindow implements TWindowManager {

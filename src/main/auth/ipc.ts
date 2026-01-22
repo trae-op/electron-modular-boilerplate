@@ -1,4 +1,3 @@
-import { session } from "electron";
 import { restApi } from "../config.js";
 import { IpcHandler, getWindow as getWindows, type TParamOnInit } from "@devisfuture/electron-modular";
 import { ipcMainOn, ipcWebContentsSend } from "#shared/ipc/ipc.js";
@@ -13,15 +12,13 @@ export class AuthIpc {
   onInit({ getWindow }: TParamOnInit<TWindows['auth']>): void {
     const authWindow = getWindow('window:auth');
     const mainWindow = getWindows("window:main");
-    const authSession = session.fromPartition("persist:auth");
 
     ipcMainOn('windowAuth', async (_, { provider }) => {
-      console.log("AuthIpc - windowAuth - provider:", `${restApi.urls.base}${restApi.urls.baseApi}${restApi.urls.auth.base}${restApi.urls.auth[provider]}`);
       authWindow.create({
         loadURL: `${restApi.urls.base}${restApi.urls.baseApi}${restApi.urls.auth.base}${restApi.urls.auth[provider]}`,
         options: {
           webPreferences: {
-            session: authSession,
+            partition: "persist:auth",
           },
         },
       });

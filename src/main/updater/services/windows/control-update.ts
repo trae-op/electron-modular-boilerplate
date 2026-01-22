@@ -1,12 +1,14 @@
-import { dialog } from "electron";
-import pkg from "electron-updater";
-import { Injectable, Inject } from "@devisfuture/electron-modular";
-import { messages } from "#main/config.js";
-import { SendUpdateInfoService } from "../send-update-info.js";
 import { setStore } from "#shared/store.js";
 import { isDev, isPlatform } from "#shared/utils.js";
+import { Inject, Injectable } from "@devisfuture/electron-modular";
+import { dialog } from "electron";
+import pkg from "electron-updater";
+
+import { messages } from "#main/config.js";
+
 import { UPDATER_NOTIFICATION_PROVIDER } from "../../tokens.js";
 import type { TUpdaterNotificationProvider } from "../../types.js";
+import { SendUpdateInfoService } from "../send-update-info.js";
 
 const { autoUpdater } = pkg;
 

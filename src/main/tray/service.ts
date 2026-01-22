@@ -1,14 +1,16 @@
-import {  Menu, Tray } from "electron";
-import path from "node:path";
-import { icons, menu } from "../config.js";
-import { Injectable } from "@devisfuture/electron-modular";
-import { isDev, isPlatform } from "#shared/utils.js";
 import { getAssetsPath } from "#shared/path-resolver.js";
+import { isDev, isPlatform } from "#shared/utils.js";
+import { Injectable } from "@devisfuture/electron-modular";
+import { Menu, Tray } from "electron";
+import path from "node:path";
+
+import { icons, menu } from "../config.js";
+
 import type { TMenuItem } from "#main/types.js";
 
 const defaultMenu = new Map<string, TMenuItem[]>([
   [
-    "default", 
+    "default",
     [
       {
         label: menu.labels.showApp,
@@ -23,7 +25,7 @@ const defaultMenu = new Map<string, TMenuItem[]>([
         label: menu.labels.quit,
         name: "quit",
       },
-    ]
+    ],
   ],
 ]);
 
@@ -36,8 +38,6 @@ export class TrayService {
   getMenu(): TMenuItem[] {
     return defaultMenu.get("default")!;
   }
-
-
 
   collect(items?: TMenuItem[]): void {
     this.build(items !== undefined ? items : this.getMenu());

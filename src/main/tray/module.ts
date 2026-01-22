@@ -1,4 +1,5 @@
 import { RgModule } from "@devisfuture/electron-modular";
+
 import { TrayService } from "./service.js";
 
 @RgModule({

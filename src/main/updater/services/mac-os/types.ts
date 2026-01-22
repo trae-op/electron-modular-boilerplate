@@ -2,7 +2,7 @@ type TEventCallBack = (
   data: Pick<
     TUpdateData,
     "status" | "version" | "downloadedPercent" | "updateFile"
-  >
+  >,
 ) => void;
 
 export type TOptionsUpdater = {

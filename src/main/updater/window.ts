@@ -1,4 +1,5 @@
 import { WindowManager } from "@devisfuture/electron-modular";
+
 import type { TWindowManager } from "../types.js";
 import { CheckForUpdatesService } from "./services/check-for-updates.js";
 

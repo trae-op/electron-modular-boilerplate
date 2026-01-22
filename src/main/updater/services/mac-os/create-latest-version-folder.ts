@@ -1,7 +1,9 @@
-import { mkdir } from "fs/promises";
 import { Injectable } from "@devisfuture/electron-modular";
-import type { TPromiseCreateFolder } from "./types.js";
+import { mkdir } from "fs/promises";
+
 import { messages } from "#main/config.js";
+
+import type { TPromiseCreateFolder } from "./types.js";
 
 @Injectable()
 export class CreateLatestVersionFolderService {

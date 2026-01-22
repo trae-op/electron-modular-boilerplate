@@ -1,18 +1,22 @@
+import { showErrorMessages } from "#shared/error-messages.js";
+import { ipcWebContentsSend } from "#shared/ipc/ipc.js";
+import { setElectronStorage } from "#shared/store.js";
+import {
+  WindowManager,
+  getWindow as getWindows,
+} from "@devisfuture/electron-modular";
 import {
   BrowserWindow,
   type Event,
   type WebContentsWillRedirectEventParams,
 } from "electron";
-import { WindowManager, getWindow as getWindows } from "@devisfuture/electron-modular";
-import { setElectronStorage } from "#shared/store.js";
-import { ipcWebContentsSend } from "#shared/ipc/ipc.js";
 
 import { messages } from "../config.js";
-import type { TWindowManager } from "../types.js";
-import { showErrorMessages } from "#shared/error-messages.js";
 
-@WindowManager<TWindows['auth']>({
-  hash: 'window:auth',
+import type { TWindowManager } from "../types.js";
+
+@WindowManager<TWindows["auth"]>({
+  hash: "window:auth",
   options: {
     autoHideMenuBar: true,
     minimizable: false,
@@ -57,24 +61,24 @@ export class AuthWindow implements TWindowManager {
     }
 
     if (isVerify) {
+      this.window?.close();
+
       const token = searchParams.get("token");
       const userId = searchParams.get("userId");
       const mainWindow = getWindows<TWindows["main"]>("window:main");
 
-      if (token !== null && userId !== null && this.window !== undefined && mainWindow !== undefined) {
-        setElectronStorage("authToken", token);
-        setElectronStorage("userId", userId);
+      if (token !== null && userId !== null && mainWindow !== undefined) {
         ipcWebContentsSend("auth", mainWindow.webContents, {
           isAuthenticated: true,
         });
+        setElectronStorage("authToken", token);
+        setElectronStorage("userId", userId);
       } else {
         showErrorMessages({
           title: messages.auth.errorTokenUserMissing,
           body: `Token=${token}\nUserId: ${userId}`,
         });
       }
-
-      this.window?.close();
     }
   }
 }

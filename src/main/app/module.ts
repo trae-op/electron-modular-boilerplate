@@ -2,21 +2,14 @@ import { RgModule } from "@devisfuture/electron-modular";
 
 import { MenuModule } from "#main/menu/module.js";
 import { MenuService } from "#main/menu/service.js";
-
 import { TrayModule } from "#main/tray/module.js";
 import { TrayService } from "#main/tray/service.js";
 
 import { AppIpc } from "./ipc.js";
 import { AppService } from "./service.js";
+import { MENU_PROVIDER, TRAY_PROVIDER } from "./tokens.js";
+import type { TMenuProvider, TTrayProvider } from "./types.js";
 import { AppWindow } from "./window.js";
-import {
-  MENU_PROVIDER,
-  TRAY_PROVIDER,
-} from "./tokens.js";
-import type {
-  TMenuProvider,
-  TTrayProvider,
-} from "./types.js";
 
 @RgModule({
   imports: [MenuModule, TrayModule],
@@ -40,7 +33,7 @@ import type {
         destroy: () => trayService.destroy(),
       }),
       inject: [TrayService],
-    }
+    },
   ],
 })
 export class AppModule {}

@@ -1,29 +1,28 @@
 import { RgModule } from "@devisfuture/electron-modular";
-import { CheckForUpdateService } from "./services/mac-os/check-for-update.js";
-import { VerifyService } from "./services/mac-os/verify.js";
-import { CreateLatestVersionFolderService } from "./services/mac-os/create-latest-version-folder.js";
-import { DownloadFileService } from "./services/mac-os/download-file.js";
-import { ControlUpdateService } from "./services/mac-os/control-update.js";
-import { ControlUpdateWindowsPlatformService } from "./services/windows/control-update.js";
-import { SendUpdateInfoService } from "./services/send-update-info.js";
-import { CheckUpdateProcessService } from "./services/check-update-process.js";
-import { CheckForUpdatesService } from "./services/check-for-updates.js";
-import { SetFeedUrlService } from "./services/windows/set-feed-url.js";
-import { OpenLatestVersionService } from "./services/mac-os/open-latest-version.js";
-import { UpdaterIpc } from "./ipc.js";
-import { TrayModule } from "#main/tray/module.js";
-import { TrayService } from "#main/tray/service.js";
+
 import { NotificationModule } from "#main/notification/module.js";
 import { NotificationService } from "#main/notification/service.js";
-import { UpdaterWindow } from "./window.js";
+import { TrayModule } from "#main/tray/module.js";
+import { TrayService } from "#main/tray/service.js";
+
+import { UpdaterIpc } from "./ipc.js";
+import { CheckForUpdatesService } from "./services/check-for-updates.js";
+import { CheckUpdateProcessService } from "./services/check-update-process.js";
+import { CheckForUpdateService } from "./services/mac-os/check-for-update.js";
+import { ControlUpdateService } from "./services/mac-os/control-update.js";
+import { CreateLatestVersionFolderService } from "./services/mac-os/create-latest-version-folder.js";
+import { DownloadFileService } from "./services/mac-os/download-file.js";
+import { OpenLatestVersionService } from "./services/mac-os/open-latest-version.js";
+import { VerifyService } from "./services/mac-os/verify.js";
+import { SendUpdateInfoService } from "./services/send-update-info.js";
+import { ControlUpdateWindowsPlatformService } from "./services/windows/control-update.js";
+import { SetFeedUrlService } from "./services/windows/set-feed-url.js";
 import {
   UPDATER_NOTIFICATION_PROVIDER,
   UPDATER_TRAY_PROVIDER,
 } from "./tokens.js";
-import type {
-  TTrayProvider,
-  TUpdaterNotificationProvider,
-} from "./types.js";
+import type { TTrayProvider, TUpdaterNotificationProvider } from "./types.js";
+import { UpdaterWindow } from "./window.js";
 
 @RgModule({
   imports: [TrayModule, NotificationModule],
@@ -61,6 +60,6 @@ import type {
       }),
       inject: [NotificationService],
     },
-  ]
+  ],
 })
 export class UpdaterModule {}

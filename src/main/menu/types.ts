@@ -5,8 +5,7 @@ type TCustomName = {
 };
 
 interface IMenuItemConstructorOptions
-  extends MenuItemConstructorOptions,
-    TCustomName {}
+  extends MenuItemConstructorOptions, TCustomName {}
 
 interface IMenuItem extends MenuItem, TCustomName {}
 

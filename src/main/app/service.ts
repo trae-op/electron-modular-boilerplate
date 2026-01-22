@@ -1,5 +1,6 @@
-import { app } from "electron";
 import { Inject, Injectable, getWindow } from "@devisfuture/electron-modular";
+import { app } from "electron";
+
 import { TRAY_PROVIDER } from "./tokens.js";
 import type { TTrayProvider } from "./types.js";
 

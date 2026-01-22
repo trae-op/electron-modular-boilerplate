@@ -1,11 +1,13 @@
+import { Injectable } from "@devisfuture/electron-modular";
+import { compareVersions } from "compare-versions";
 import { app, dialog } from "electron";
 import path from "node:path";
-import { compareVersions } from "compare-versions";
-import { Injectable } from "@devisfuture/electron-modular";
-import { TOptionsUpdater } from "./types.js";
+
 import { folders, messages, restApi } from "#main/config.js";
-import { VerifyService } from "./verify.js";
+
 import { DownloadFileService } from "./download-file.js";
+import { TOptionsUpdater } from "./types.js";
+import { VerifyService } from "./verify.js";
 
 @Injectable()
 export class CheckForUpdateService {

@@ -1,8 +1,10 @@
 import { RgModule } from "@devisfuture/electron-modular";
+
 import { RestApiModule } from "#main/rest-api/module.js";
 import { RestApiService } from "#main/rest-api/service.js";
-import { UserService } from "./service.js";
+
 import { UserIpc } from "./ipc.js";
+import { UserService } from "./service.js";
 import { USER_REST_API_PROVIDER } from "./tokens.js";
 import type { TUserRestApiProvider } from "./types.js";
 
@@ -18,6 +20,6 @@ import type { TUserRestApiProvider } from "./types.js";
       }),
       inject: [RestApiService],
     },
-  ]
+  ],
 })
 export class UserModule {}

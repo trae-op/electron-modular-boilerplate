@@ -1,21 +1,21 @@
-import { app, dialog } from "electron";
+import { ipcMainOn } from "#shared/ipc/ipc.js";
 import {
   Inject,
-  TParamOnInit,
-  TIpcHandlerInterface,
   IpcHandler,
+  TIpcHandlerInterface,
+  TParamOnInit,
   getWindow as getWindows,
 } from "@devisfuture/electron-modular";
-import { ipcMainOn } from "#shared/ipc/ipc.js";
-import { AppService } from "./service.js";
+import { app, dialog } from "electron";
+
 import { messages } from "../config.js";
+
+import { AppService } from "./service.js";
 import type { TDestroyProcess } from "./types.js";
 
 @IpcHandler()
 export class AppIpc implements TIpcHandlerInterface {
-  constructor(
-    private appService: AppService,
-  ) {
+  constructor(private appService: AppService) {
     process.on("uncaughtException", (error) => {
       this.destroyProcess({
         error,
@@ -59,7 +59,7 @@ export class AppIpc implements TIpcHandlerInterface {
     const mainWindow = getWindow("window:main");
     const window = await mainWindow.create();
 
-    ipcMainOn('windowClosePreload', async () => {
+    ipcMainOn("windowClosePreload", async () => {
       const preloadAppWindow =
         getWindows<TWindows["preloadApp"]>("window:preload-app");
       if (preloadAppWindow !== undefined) {

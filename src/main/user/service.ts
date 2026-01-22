@@ -1,7 +1,9 @@
-import { type AxiosRequestConfig } from "axios";
-import { restApi } from "../config.js";
-import { Injectable, Inject } from "@devisfuture/electron-modular";
 import { getElectronStorage } from "#shared/store.js";
+import { Inject, Injectable } from "@devisfuture/electron-modular";
+import { type AxiosRequestConfig } from "axios";
+
+import { restApi } from "../config.js";
+
 import { USER_REST_API_PROVIDER } from "./tokens.js";
 import type { TUserRestApiProvider } from "./types.js";
 

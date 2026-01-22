@@ -1,12 +1,14 @@
-import { Menu } from "electron";
-import { menu } from "../config.js";
-import { Injectable } from "@devisfuture/electron-modular";
 import { isPlatform } from "#shared/utils.js";
+import { Injectable } from "@devisfuture/electron-modular";
+import { Menu } from "electron";
+
+import { menu } from "../config.js";
+
 import type { TMenuItem } from "#main/types.js";
 
 const defaultMenu = new Map<string, TMenuItem[]>([
   [
-    "default", 
+    "default",
     [
       {
         label: isPlatform("darwin") ? undefined : menu.labels.app,
@@ -35,7 +37,7 @@ const defaultMenu = new Map<string, TMenuItem[]>([
           { role: "selectAll" },
         ],
       },
-    ]
+    ],
   ],
 ]);
 

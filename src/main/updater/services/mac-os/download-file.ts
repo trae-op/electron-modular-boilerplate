@@ -1,10 +1,12 @@
-import { app } from "electron";
-import path from "node:path";
-import fs from "node:fs";
 import { Injectable } from "@devisfuture/electron-modular";
-import type { TOptionsDownloadFile } from "./types.js";
+import { app } from "electron";
+import fs from "node:fs";
+import path from "node:path";
+
 import { folders, restApi } from "#main/config.js";
+
 import { CreateLatestVersionFolderService } from "./create-latest-version-folder.js";
+import type { TOptionsDownloadFile } from "./types.js";
 
 @Injectable()
 export class DownloadFileService {

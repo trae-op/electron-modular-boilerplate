@@ -1,15 +1,15 @@
-import { app, BrowserWindow } from "electron";
-import pkg from "electron-updater";
+import { ipcMainOn } from "#shared/ipc/ipc.js";
 import {
-  destroyWindows,
-  IpcHandler,
   Inject,
+  IpcHandler,
   type TIpcHandlerInterface,
   type TParamOnInit,
+  destroyWindows,
 } from "@devisfuture/electron-modular";
-import { ipcMainOn } from "#shared/ipc/ipc.js";
-import { OpenLatestVersionService } from "./services/mac-os/open-latest-version.js";
+import { BrowserWindow, app } from "electron";
+import pkg from "electron-updater";
 
+import { OpenLatestVersionService } from "./services/mac-os/open-latest-version.js";
 import { UPDATER_TRAY_PROVIDER } from "./tokens.js";
 import type { TTrayProvider } from "./types.js";
 

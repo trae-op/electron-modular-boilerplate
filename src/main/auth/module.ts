@@ -1,8 +1,8 @@
 import { RgModule } from "@devisfuture/electron-modular";
-import { AuthService } from "./service.js";
-import { AuthIpc } from "./ipc.js";
-import { AuthWindow } from "./window.js";
 
+import { AuthIpc } from "./ipc.js";
+import { AuthService } from "./service.js";
+import { AuthWindow } from "./window.js";
 
 @RgModule({
   providers: [AuthService],

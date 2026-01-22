@@ -1,9 +1,9 @@
-import { app } from "electron";
+import { ipcMainHandle } from "#shared/ipc/ipc.js";
 import {
   IpcHandler,
   type TIpcHandlerInterface,
 } from "@devisfuture/electron-modular";
-import { ipcMainHandle } from "#shared/ipc/ipc.js";
+import { app } from "electron";
 
 @IpcHandler()
 export class AppVersionIpc implements TIpcHandlerInterface {

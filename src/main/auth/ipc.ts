@@ -1,19 +1,25 @@
-import { restApi } from "../config.js";
-import { IpcHandler, getWindow as getWindows, type TParamOnInit } from "@devisfuture/electron-modular";
-import { ipcMainOn, ipcWebContentsSend } from "#shared/ipc/ipc.js";
-import { AuthService } from "./service.js";
-import { getElectronStorage } from "#shared/store.js";
 import { cacheUser } from "#shared/cache-responses.js";
+import { ipcMainOn, ipcWebContentsSend } from "#shared/ipc/ipc.js";
+import { getElectronStorage } from "#shared/store.js";
+import {
+  IpcHandler,
+  type TParamOnInit,
+  getWindow as getWindows,
+} from "@devisfuture/electron-modular";
+
+import { restApi } from "../config.js";
+
+import { AuthService } from "./service.js";
 
 @IpcHandler()
 export class AuthIpc {
-  constructor(private authProvider: AuthService) {}
+  constructor(private authService: AuthService) {}
 
-  onInit({ getWindow }: TParamOnInit<TWindows['auth']>): void {
-    const authWindow = getWindow('window:auth');
+  onInit({ getWindow }: TParamOnInit<TWindows["auth"]>): void {
+    const authWindow = getWindow("window:auth");
     const mainWindow = getWindows("window:main");
 
-    ipcMainOn('windowAuth', async (_, { provider }) => {
+    ipcMainOn("windowAuth", async (_, { provider }) => {
       authWindow.create({
         loadURL: `${restApi.urls.base}${restApi.urls.baseApi}${restApi.urls.auth.base}${restApi.urls.auth[provider]}`,
         options: {
@@ -24,12 +30,12 @@ export class AuthIpc {
       });
     });
 
-    ipcMainOn('checkAuth', () => {
+    ipcMainOn("checkAuth", () => {
       const userId = getElectronStorage("userId");
       const userFromCache = cacheUser(userId);
 
       if (mainWindow !== undefined) {
-        ipcWebContentsSend('auth', mainWindow.webContents, {
+        ipcWebContentsSend("auth", mainWindow.webContents, {
           isAuthenticated: Boolean(userFromCache),
         });
       }
@@ -37,7 +43,7 @@ export class AuthIpc {
 
     ipcMainOn("logout", () => {
       if (mainWindow !== undefined) {
-        this.authProvider.logout(mainWindow);
+        this.authService.logout(mainWindow);
       }
     });
   }

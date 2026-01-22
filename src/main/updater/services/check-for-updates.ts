@@ -1,8 +1,9 @@
-import pkg from "electron-updater";
-import { Injectable } from "@devisfuture/electron-modular";
 import { isDev, isPlatform } from "#shared/utils.js";
-import { ControlUpdateService } from "./mac-os/control-update.js";
+import { Injectable } from "@devisfuture/electron-modular";
+import pkg from "electron-updater";
+
 import { CheckUpdateProcessService } from "./check-update-process.js";
+import { ControlUpdateService } from "./mac-os/control-update.js";
 
 const { autoUpdater } = pkg;
 

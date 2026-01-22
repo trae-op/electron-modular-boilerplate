@@ -2,6 +2,7 @@ import {
   IpcHandler,
   type TIpcHandlerInterface,
 } from "@devisfuture/electron-modular";
+
 import { NotificationService } from "./service.js";
 
 @IpcHandler()

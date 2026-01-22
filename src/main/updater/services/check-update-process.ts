@@ -1,5 +1,6 @@
-import { getStore } from "#shared/store.js";
 import { Injectable } from "@devisfuture/electron-modular";
+
+import { getStore } from "#shared/store.js";
 
 @Injectable()
 export class CheckUpdateProcessService {

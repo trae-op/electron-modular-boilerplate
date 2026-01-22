@@ -1,4 +1,3 @@
-import { ipcMainOn } from "#shared/ipc/ipc.js";
 import {
   Inject,
   IpcHandler,
@@ -7,6 +6,8 @@ import {
   getWindow as getWindows,
 } from "@devisfuture/electron-modular";
 import { app, dialog } from "electron";
+
+import { ipcMainOn } from "#shared/ipc/ipc.js";
 
 import { messages } from "../config.js";
 

@@ -1,7 +1,8 @@
-import { isDev } from "#shared/utils.js";
 import { WindowManager } from "@devisfuture/electron-modular";
 import { app } from "electron";
 import path from "node:path";
+
+import { isDev } from "#shared/utils.js";
 
 import type { TWindowManager } from "../types.js";
 

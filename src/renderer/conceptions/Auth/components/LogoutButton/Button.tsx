@@ -1,8 +1,6 @@
-import { memo } from "react";
-
-import { cn } from "@utils/classes";
-
 import { Button } from "@components/Button";
+import { cn } from "@utils/classes";
+import { memo } from "react";
 
 import { useControl } from "../../hooks";
 import type { TPropsLogoutButton } from "./types";

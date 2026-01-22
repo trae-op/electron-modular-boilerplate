@@ -1,7 +1,6 @@
+import { cn } from "@utils/classes";
 import { memo, useCallback } from "react";
 import type { MouseEvent } from "react";
-
-import { cn } from "@utils/classes";
 
 import { Chip } from "./Chip";
 import type { TAutocompleteInputProps } from "./types";

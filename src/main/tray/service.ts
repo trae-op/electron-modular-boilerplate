@@ -1,8 +1,9 @@
-import { getAssetsPath } from "#shared/path-resolver.js";
-import { isDev, isPlatform } from "#shared/utils.js";
 import { Injectable } from "@devisfuture/electron-modular";
 import { Menu, Tray } from "electron";
 import path from "node:path";
+
+import { getAssetsPath } from "#shared/path-resolver.js";
+import { isDev, isPlatform } from "#shared/utils.js";
 
 import { icons, menu } from "../config.js";
 

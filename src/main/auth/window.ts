@@ -1,6 +1,3 @@
-import { showErrorMessages } from "#shared/error-messages.js";
-import { ipcWebContentsSend } from "#shared/ipc/ipc.js";
-import { setElectronStorage } from "#shared/store.js";
 import {
   WindowManager,
   getWindow as getWindows,
@@ -10,6 +7,10 @@ import {
   type Event,
   type WebContentsWillRedirectEventParams,
 } from "electron";
+
+import { showErrorMessages } from "#shared/error-messages.js";
+import { ipcWebContentsSend } from "#shared/ipc/ipc.js";
+import { setElectronStorage } from "#shared/store.js";
 
 import { messages } from "../config.js";
 

@@ -1,5 +1,6 @@
-import { setStore } from "#shared/store.js";
 import { Inject, Injectable } from "@devisfuture/electron-modular";
+
+import { setStore } from "#shared/store.js";
 
 import { messages } from "#main/config.js";
 

@@ -1,7 +1,6 @@
+import { cn } from "@utils/classes";
 import isEqual from "lodash.isequal";
 import { memo } from "react";
-
-import { cn } from "@utils/classes";
 
 import { TPropsLoadingSpinner } from "./types";
 

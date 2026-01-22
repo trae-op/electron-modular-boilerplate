@@ -1,6 +1,5 @@
-import { memo } from "react";
-
 import { cn } from "@utils/classes";
+import { memo } from "react";
 
 import type { TCardProps } from "./types";
 

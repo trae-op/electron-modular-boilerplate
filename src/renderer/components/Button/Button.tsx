@@ -1,6 +1,5 @@
-import { memo, useMemo } from "react";
-
 import { cn } from "@utils/classes";
+import { memo, useMemo } from "react";
 
 import type { TButtonColor, TButtonProps, TButtonVariant } from "./types";
 

@@ -1,14 +1,15 @@
-import {
-  TCacheResponse,
-  getElectronStorage,
-  setElectronStorage,
-} from "#shared/store.js";
 import { Injectable } from "@devisfuture/electron-modular";
 import axios, {
   type AxiosError,
   type AxiosInstance,
   type AxiosResponse,
 } from "axios";
+
+import {
+  TCacheResponse,
+  getElectronStorage,
+  setElectronStorage,
+} from "#shared/store.js";
 
 import { restApi } from "../config.js";
 

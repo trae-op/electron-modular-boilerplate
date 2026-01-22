@@ -1,13 +1,10 @@
-import { memo, useMemo } from "react";
-
+import { Container as ContainerAppVersion } from "@composites/AppVersion";
+import { Toggle as LightDarkModeToggle } from "@composites/LightDarkMode";
 import { LogoutButton } from "@conceptions/Auth";
 import { DownloadedButton, useStatusSelector } from "@conceptions/Updater";
 import { UserPopover } from "@conceptions/User";
-
-import { Container as ContainerAppVersion } from "@composites/AppVersion";
-import { Toggle as LightDarkModeToggle } from "@composites/LightDarkMode";
-
 import { TopPanel } from "@layouts/TopPanel";
+import { memo, useMemo } from "react";
 
 const ContainerPopover = memo(() => {
   const status = useStatusSelector();

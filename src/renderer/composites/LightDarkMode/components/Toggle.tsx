@@ -1,9 +1,7 @@
+import { IconButton } from "@components/IconButton";
+import { cn } from "@utils/classes";
 import { Moon, Sun } from "lucide-react";
 import { type MouseEvent, memo, useCallback } from "react";
-
-import { cn } from "@utils/classes";
-
-import { IconButton } from "@components/IconButton";
 
 import { usePaletteModeSelector, useTogglePaletteMode } from "../hooks";
 import type { TPropsToggle } from "./types";

@@ -1,6 +1,5 @@
-import { type HTMLAttributes, memo } from "react";
-
 import { cn } from "@utils/classes";
+import { type HTMLAttributes, memo } from "react";
 
 import { useMessageSelector } from "../context/useSelectors";
 

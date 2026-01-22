@@ -1,14 +1,10 @@
-import { Suspense, lazy } from "react";
-import { HashRouter, Route, Routes } from "react-router-dom";
-
 import { LoadingSpinner } from "@components/LoadingSpinner";
-
-import { ProviderAuth } from "@conceptions/Auth";
-
 import { ProviderLightDarkMode } from "@composites/LightDarkMode";
 import { PrivateRoute, PublicRoute } from "@composites/Routes";
-
+import { ProviderAuth } from "@conceptions/Auth";
 import { MainLayout } from "@layouts/Main";
+import { Suspense, lazy } from "react";
+import { HashRouter, Route, Routes } from "react-router-dom";
 
 const LazyHomeWindow = lazy(() => import("./windows/home/Home"));
 const LazyUpdaterWindow = lazy(() => import("./windows/updater/Updater"));

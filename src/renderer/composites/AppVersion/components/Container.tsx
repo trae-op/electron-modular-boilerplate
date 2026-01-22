@@ -1,6 +1,5 @@
-import { memo } from "react";
-
 import { cn } from "@utils/classes";
+import { memo } from "react";
 
 import logo from "../../../../assets/72x72.png";
 import { useInvoke } from "../hooks";

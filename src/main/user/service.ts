@@ -1,6 +1,7 @@
-import { getElectronStorage } from "#shared/store.js";
 import { Inject, Injectable } from "@devisfuture/electron-modular";
 import { type AxiosRequestConfig } from "axios";
+
+import { getElectronStorage } from "#shared/store.js";
 
 import { restApi } from "../config.js";
 

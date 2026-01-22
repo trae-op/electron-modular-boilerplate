@@ -1,6 +1,5 @@
-import { type ElementType, memo, useMemo } from "react";
-
 import { cn } from "@utils/classes";
+import { type ElementType, memo, useMemo } from "react";
 
 import { ListItem } from "./ListItem";
 import type { TListProps } from "./types";

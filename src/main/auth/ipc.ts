@@ -1,10 +1,11 @@
-import { ipcMainOn, ipcWebContentsSend } from "#shared/ipc/ipc.js";
-import { getElectronStorage } from "#shared/store.js";
 import {
   IpcHandler,
   type TParamOnInit,
   getWindow as getWindows,
 } from "@devisfuture/electron-modular";
+
+import { ipcMainOn, ipcWebContentsSend } from "#shared/ipc/ipc.js";
+import { getElectronStorage } from "#shared/store.js";
 
 import { restApi } from "../config.js";
 

@@ -1,7 +1,6 @@
+import { cn } from "@utils/classes";
 import { type MouseEvent, memo, useCallback, useEffect, useMemo } from "react";
 import { createPortal } from "react-dom";
-
-import { cn } from "@utils/classes";
 
 import type { TPopupProps } from "./types";
 

@@ -1,6 +1,5 @@
-import { memo, useId } from "react";
-
 import { cn } from "@utils/classes";
+import { memo, useId } from "react";
 
 import type { TCheckboxProps } from "./types";
 

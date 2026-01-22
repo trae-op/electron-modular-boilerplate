@@ -1,6 +1,7 @@
-import { joinPosixPath } from "#shared/utils.js";
 import { Injectable } from "@devisfuture/electron-modular";
 import { app, shell } from "electron";
+
+import { joinPosixPath } from "#shared/utils.js";
 
 import { folders, messages } from "#main/config.js";
 

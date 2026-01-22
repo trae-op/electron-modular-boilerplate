@@ -1,6 +1,7 @@
-import { isPlatform } from "#shared/utils.js";
 import { Injectable } from "@devisfuture/electron-modular";
 import { Menu } from "electron";
+
+import { isPlatform } from "#shared/utils.js";
 
 import { menu } from "../config.js";
 

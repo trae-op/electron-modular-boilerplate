@@ -1,5 +1,6 @@
-import { ipcWebContentsSend } from "#shared/ipc/ipc.js";
 import { Injectable, getWindow } from "@devisfuture/electron-modular";
+
+import { ipcWebContentsSend } from "#shared/ipc/ipc.js";
 
 @Injectable()
 export class SendUpdateInfoService {

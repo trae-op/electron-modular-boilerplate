@@ -1,4 +1,3 @@
-import { ipcMainOn } from "#shared/ipc/ipc.js";
 import {
   Inject,
   IpcHandler,
@@ -8,6 +7,8 @@ import {
 } from "@devisfuture/electron-modular";
 import { BrowserWindow, app } from "electron";
 import pkg from "electron-updater";
+
+import { ipcMainOn } from "#shared/ipc/ipc.js";
 
 import { OpenLatestVersionService } from "./services/mac-os/open-latest-version.js";
 import { UPDATER_TRAY_PROVIDER } from "./tokens.js";

@@ -6,6 +6,7 @@
   "tabWidth": 2,
   "plugins": ["@trivago/prettier-plugin-sort-imports"],
   "importOrder": [
+    "^@?\\w",
     "<THIRD_PARTY_MODULES>",
     "^#main/config|^@config/(.*)$|^(\\.\\/|\\.\\.\\/)+config",
     "^#main/@shared|^@utils/(.*)$|^(\\.\\/|\\.\\.\\/)+@shared",

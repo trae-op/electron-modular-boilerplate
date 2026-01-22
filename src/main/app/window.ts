@@ -1,10 +1,11 @@
-import { isDev } from "#shared/utils.js";
 import {
   Inject,
   WindowManager,
   destroyWindows,
 } from "@devisfuture/electron-modular";
 import { BrowserWindow, Event, app } from "electron";
+
+import { isDev } from "#shared/utils.js";
 
 import { menu } from "#main/config.js";
 

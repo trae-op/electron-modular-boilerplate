@@ -1,6 +1,5 @@
-import { Navigate, Outlet } from "react-router-dom";
-
 import { useAuthenticatedSelector } from "@conceptions/Auth";
+import { Navigate, Outlet } from "react-router-dom";
 
 export const PrivateRoute = () => {
   const isAuthenticated = useAuthenticatedSelector();

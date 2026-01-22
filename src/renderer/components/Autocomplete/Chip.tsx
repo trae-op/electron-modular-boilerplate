@@ -1,7 +1,6 @@
+import { cn } from "@utils/classes";
 import { X } from "lucide-react";
 import { memo, useMemo } from "react";
-
-import { cn } from "@utils/classes";
 
 import type { TChipProps } from "./types";
 

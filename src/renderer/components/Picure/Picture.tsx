@@ -1,7 +1,6 @@
+import { cn } from "@utils/classes";
 import { ImageOff, Loader2 } from "lucide-react";
 import { memo, useCallback, useEffect, useMemo, useState } from "react";
-
-import { cn } from "@utils/classes";
 
 import type { TPictureProps } from "./types";
 

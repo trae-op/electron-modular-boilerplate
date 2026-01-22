@@ -1,3 +1,4 @@
+import { cn } from "@utils/classes";
 import {
   memo,
   useCallback,
@@ -8,8 +9,6 @@ import {
   useState,
 } from "react";
 import { createPortal } from "react-dom";
-
-import { cn } from "@utils/classes";
 
 import type { TPopoverPosition, TPopoverProps } from "./types";
 

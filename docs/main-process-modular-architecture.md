@@ -724,6 +724,38 @@ export class MyFeatureIpc implements TIpcHandlerInterface {
 }
 ```
 
+### Auth windows & session partitioning (recommended for OAuth flows) 🔐
+
+When you open an external authentication page (for example, an OAuth provider) inside a BrowserWindow, set `webPreferences.partition` to `"persist:auth"`. This creates a separate persistent session partition that:
+
+- isolates authentication cookies, localStorage, indexedDB and other session data from the app's main session (prevents accidental leakage or sharing of auth cookies),
+- persists auth state across app restarts (useful for single sign-on flows), and
+- makes it straightforward to clear only the auth-related storage when the user logs out.
+
+Exact example (IPC handler):
+
+```js
+ipcMainOn("windowAuth", async (_, { provider }) => {
+  authWindow.create({
+    loadURL: `${restApi.urls.base}${restApi.urls.baseApi}${restApi.urls.auth.base}${restApi.urls.auth[provider]}`,
+    options: {
+      webPreferences: {
+        partition: "persist:auth", // isolates auth cookies/session storage and persists across app restarts
+      },
+    },
+  });
+});
+```
+
+Clear auth data on logout (recommended inside `AuthService.logout`):
+
+```js
+import { session } from "electron";
+
+// Remove all storage (cookies, localStorage, indexedDB, cache) for the auth partition
+await session.fromPartition("persist:auth").clearStorageData();
+```
+
 3. **Update `module.ts`**:
 
 ```

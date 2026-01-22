@@ -1,10 +1,9 @@
-import { type MouseEvent, useCallback } from "react";
-
 import { Avatar } from "@components/Avatar";
 import { AvatarButton } from "@components/AvatarButton";
 import { IconButton } from "@components/IconButton";
 import { List } from "@components/List";
 import { Popover } from "@components/Popover";
+import { type MouseEvent, useCallback } from "react";
 
 import { useUserSelector } from "../context/useSelectors";
 import { useIpc } from "../hooks";

@@ -1,8 +1,9 @@
-import { setStore } from "#shared/store.js";
-import { isDev, isPlatform } from "#shared/utils.js";
 import { Inject, Injectable } from "@devisfuture/electron-modular";
 import { dialog } from "electron";
 import pkg from "electron-updater";
+
+import { setStore } from "#shared/store.js";
+import { isDev, isPlatform } from "#shared/utils.js";
 
 import { messages } from "#main/config.js";
 

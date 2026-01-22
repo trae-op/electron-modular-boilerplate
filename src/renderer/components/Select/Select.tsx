@@ -1,6 +1,5 @@
-import { memo, useId, useMemo } from "react";
-
 import { cn } from "@utils/classes";
+import { memo, useId, useMemo } from "react";
 
 import type { TSelectProps } from "./types";
 

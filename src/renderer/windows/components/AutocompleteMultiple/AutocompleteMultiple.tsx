@@ -1,7 +1,3 @@
-import { type ReactNode, memo, useState } from "react";
-
-import { cn } from "@utils/classes";
-
 import { Autocomplete } from "@components/Autocomplete";
 import type {
   TAutocompleteChangeValue,
@@ -11,8 +7,9 @@ import type {
 import { Checkbox } from "@components/Checkbox";
 import { Popover } from "@components/Popover";
 import { TextField } from "@components/TextField";
-
 import { LazyRender } from "@composites/LazyRender";
+import { cn } from "@utils/classes";
+import { type ReactNode, memo, useState } from "react";
 
 const AutocompleteMultiple = memo(
   ({ items }: { items: TAutocompleteOption[] }) => {

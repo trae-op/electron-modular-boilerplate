@@ -1,7 +1,6 @@
+import { cn } from "@utils/classes";
 import { memo, useMemo } from "react";
 import type { CSSProperties } from "react";
-
-import { cn } from "@utils/classes";
 
 import type { TAvatarProps } from "./types";
 

@@ -8,7 +8,7 @@ vi.mock("@devisfuture/electron-modular", () => ({
 
 vi.mock("electron", () => ({
   app: {
-    on: vi.fn(),
+    on: vi.fn((event: string, callback: () => void) => undefined),
     quit: vi.fn(),
     dock: {
       hide: vi.fn(),
@@ -89,11 +89,10 @@ describe("AppWindow", () => {
 
     const appWindow = new AppWindow(menuProvider as any, trayProvider as any);
 
-    const handler = vi
-      .mocked(app.on)
-      .mock.calls.find((call) => call[0] === "before-quit")?.[1] as
-      | (() => void)
-      | undefined;
+    const mockedAppOn = vi.mocked(app.on);
+    const calls = mockedAppOn.mock.calls as Array<[string, () => void]>;
+    const beforeQuitCall = calls.find((call) => call[0] === "before-quit");
+    const handler = beforeQuitCall?.[1];
 
     handler?.();
 

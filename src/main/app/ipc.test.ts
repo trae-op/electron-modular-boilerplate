@@ -53,7 +53,7 @@ describe("AppIpc", () => {
     new AppIpc(mockAppService as any);
 
     const error = new Error("boom");
-    process.emit("uncaughtException", error);
+    (process.emit as any)("uncaughtException", error);
 
     expect(mockAppService.destroyTrayAndWindows).toHaveBeenCalled();
     expect(mockAppService.dockHide).toHaveBeenCalled();
@@ -68,7 +68,9 @@ describe("AppIpc", () => {
 
     new AppIpc(mockAppService as any);
 
-    process.emit("unhandledRejection", "reason");
+    const reason = "reason";
+    const promise = Promise.reject(reason);
+    (process.emit as any)("unhandledRejection", reason, promise);
 
     expect(mockAppService.destroyTrayAndWindows).toHaveBeenCalled();
     expect(dialog.showMessageBox).toHaveBeenCalled();

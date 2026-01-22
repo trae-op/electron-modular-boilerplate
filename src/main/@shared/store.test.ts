@@ -1,4 +1,6 @@
+import { getLastElectronStoreInstance } from "electron-store";
 import { beforeEach, describe, expect, it, vi } from "vitest";
+import type { Mock } from "vitest";
 
 import {
   clearElectronStorage,
@@ -13,9 +15,42 @@ import {
   setStore,
 } from "./store.js";
 
+type TElectronStoreMock = {
+  set: Mock<any>;
+  get: Mock<any>;
+  has: Mock<any>;
+  delete: Mock<any>;
+  clear: Mock<any>;
+};
+
+vi.mock("electron-store", () => {
+  const instances: Array<TElectronStoreMock> = [];
+
+  const MockStore = vi.fn(() => {
+    const instance: TElectronStoreMock = {
+      set: vi.fn(),
+      get: vi.fn(),
+      has: vi.fn(),
+      delete: vi.fn(),
+      clear: vi.fn(),
+    };
+
+    instances.push(instance);
+    return instance;
+  });
+
+  const getLastElectronStoreInstance = () => instances[instances.length - 1];
+
+  return {
+    default: MockStore,
+    getLastElectronStoreInstance,
+  };
+});
+
 describe("@shared/store", () => {
   beforeEach(() => {
     clearStore();
+    vi.clearAllMocks();
   });
 
   describe("in-memory store", () => {
@@ -46,21 +81,24 @@ describe("@shared/store", () => {
   });
 
   describe("electron storage", () => {
-    it("interacts with electron-store", async () => {
+    it("interacts with electron-store", () => {
       setElectronStorage("authToken", "token-123");
+
+      const mock = getLastElectronStoreInstance();
+
+      expect(mock.set).toHaveBeenCalledWith("authToken", "token-123");
+
       getElectronStorage("authToken");
+      expect(mock.get).toHaveBeenCalledWith("authToken");
+
       hasElectronStorage("authToken");
+      expect(mock.has).toHaveBeenCalledWith("authToken");
+
       deleteFromElectronStorage("authToken");
+      expect(mock.delete).toHaveBeenCalledWith("authToken");
+
       clearElectronStorage();
-
-      const { getLastElectronStoreInstance } = await import("electron-store");
-      const instance = getLastElectronStoreInstance();
-
-      expect(instance?.set).toHaveBeenCalledWith("authToken", "token-123");
-      expect(instance?.get).toHaveBeenCalledWith("authToken");
-      expect(instance?.has).toHaveBeenCalledWith("authToken");
-      expect(instance?.delete).toHaveBeenCalledWith("authToken");
-      expect(instance?.clear).toHaveBeenCalled();
+      expect(mock.clear).toHaveBeenCalled();
     });
   });
 });

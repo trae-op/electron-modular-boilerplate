@@ -18,7 +18,11 @@ describe("UserService", () => {
     };
 
     const { UserService } = await import("./service.js");
-    const service = new UserService(restApiProvider as any);
+    const authProvider = { logout: vi.fn() };
+    const service = new UserService(
+      restApiProvider as any,
+      authProvider as any,
+    );
 
     const result = await service.byId("1");
 
@@ -42,7 +46,11 @@ describe("UserService", () => {
     };
 
     const { UserService } = await import("./service.js");
-    const service = new UserService(restApiProvider as any);
+    const authProvider = { logout: vi.fn() };
+    const service = new UserService(
+      restApiProvider as any,
+      authProvider as any,
+    );
 
     const result = await service.byId("missing");
 

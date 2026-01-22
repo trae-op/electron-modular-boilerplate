@@ -1,18 +1,19 @@
-import { Inject, Injectable } from "@devisfuture/electron-modular";
+import { Inject, Injectable, getWindow } from "@devisfuture/electron-modular";
 import { type AxiosRequestConfig } from "axios";
 
 import { getElectronStorage } from "#shared/store.js";
 
 import { restApi } from "../config.js";
 
-import { USER_REST_API_PROVIDER } from "./tokens.js";
-import type { TUserRestApiProvider } from "./types.js";
+import { AUTH_PROVIDER, USER_REST_API_PROVIDER } from "./tokens.js";
+import type { TAuthProvider, TUserRestApiProvider } from "./types.js";
 
 @Injectable()
 export class UserService {
   constructor(
     @Inject(USER_REST_API_PROVIDER)
     private restApiProvider: TUserRestApiProvider,
+    @Inject(AUTH_PROVIDER) private authProvider: TAuthProvider,
   ) {}
 
   private getAuthorization(): AxiosRequestConfig["headers"] {
@@ -38,6 +39,17 @@ export class UserService {
         isCache: true,
       },
     );
+
+    if (
+      response.error !== undefined &&
+      response.error.details?.statusCode === 401
+    ) {
+      const mainWindow = getWindow<TWindows["main"]>("window:main");
+      if (mainWindow !== undefined) {
+        this.authProvider.logout(mainWindow);
+      }
+      return;
+    }
 
     if (response.error !== undefined) {
       return;

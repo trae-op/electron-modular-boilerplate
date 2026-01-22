@@ -8,5 +8,6 @@ import { AuthWindow } from "./window.js";
   providers: [AuthService],
   ipc: [AuthIpc],
   windows: [AuthWindow],
+  exports: [AuthService],
 })
 export class AuthModule {}

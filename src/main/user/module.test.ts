@@ -1,6 +1,7 @@
 import "reflect-metadata";
 import { describe, expect, it } from "vitest";
 
+import { AuthModule } from "#main/auth/module.js";
 import { RestApiModule } from "#main/rest-api/module.js";
 
 import { UserIpc } from "./ipc.js";
@@ -13,7 +14,7 @@ describe("UserModule", () => {
     const metadata = Reflect.getMetadata("RgModule", UserModule);
 
     expect(metadata).toBeDefined();
-    expect(metadata.imports).toEqual([RestApiModule]);
+    expect(metadata.imports).toEqual([RestApiModule, AuthModule]);
     expect(metadata.ipc).toEqual([UserIpc]);
     expect(metadata.providers).toEqual(
       expect.arrayContaining([

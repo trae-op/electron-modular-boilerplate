@@ -1,4 +1,5 @@
 import { type AxiosRequestConfig } from "axios";
+import { BrowserWindow } from "electron";
 
 type TApiError = {
   code?: string | number;
@@ -22,4 +23,8 @@ export type TUserRestApiProvider = {
     endpoint: string,
     options?: TRequestOptions,
   ) => Promise<TApiResponse<TResponse>>;
+};
+
+export type TAuthProvider = {
+  logout: (window: BrowserWindow) => void;
 };

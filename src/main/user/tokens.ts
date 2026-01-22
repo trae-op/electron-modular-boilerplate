@@ -1,1 +1,2 @@
 export const USER_REST_API_PROVIDER = Symbol("USER_REST_API_PROVIDER");
+export const AUTH_PROVIDER = Symbol("AUTH_PROVIDER");

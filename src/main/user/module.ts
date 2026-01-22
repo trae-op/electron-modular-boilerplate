@@ -1,15 +1,18 @@
 import { RgModule } from "@devisfuture/electron-modular";
+import { BrowserWindow } from "electron";
 
+import { AuthModule } from "#main/auth/module.js";
+import { AuthService } from "#main/auth/service.js";
 import { RestApiModule } from "#main/rest-api/module.js";
 import { RestApiService } from "#main/rest-api/service.js";
 
 import { UserIpc } from "./ipc.js";
 import { UserService } from "./service.js";
-import { USER_REST_API_PROVIDER } from "./tokens.js";
-import type { TUserRestApiProvider } from "./types.js";
+import { AUTH_PROVIDER, USER_REST_API_PROVIDER } from "./tokens.js";
+import type { TAuthProvider, TUserRestApiProvider } from "./types.js";
 
 @RgModule({
-  imports: [RestApiModule],
+  imports: [RestApiModule, AuthModule],
   ipc: [UserIpc],
   providers: [
     UserService,
@@ -19,6 +22,13 @@ import type { TUserRestApiProvider } from "./types.js";
         get: (endpoint, options) => restApiService.get(endpoint, options),
       }),
       inject: [RestApiService],
+    },
+    {
+      provide: AUTH_PROVIDER,
+      useFactory: (authService: AuthService): TAuthProvider => ({
+        logout: (window: BrowserWindow) => authService.logout(window),
+      }),
+      inject: [AuthService],
     },
   ],
 })

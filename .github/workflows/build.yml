@@ -1,0 +1,63 @@
+name: App build
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - "README.md"
+      - "package.json"
+      - "docs/**"
+      - ".vscode/**"
+      - ".gitignore"
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  build-macos:
+    runs-on: macos-latest
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Setup dependencies
+        run: npm install
+
+      - name: Run unit tests
+        run: npm run test:unit:renderer && npm run test:unit:main
+
+      - name: Run Build for macOS
+        run: npm run build:mac:publish
+
+  build-windows:
+    runs-on: windows-latest
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Setup dependencies
+        run: npm install
+
+      - name: Run unit tests
+        run: npm run test:unit:renderer && npm run test:unit:main
+
+      - name: Run Build for Windows
+        run: npm run build:win:publish

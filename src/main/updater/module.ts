@@ -61,5 +61,6 @@ import { UpdaterWindow } from "./window.js";
       inject: [NotificationService],
     },
   ],
+  exports: [CheckForUpdatesService],
 })
 export class UpdaterModule {}

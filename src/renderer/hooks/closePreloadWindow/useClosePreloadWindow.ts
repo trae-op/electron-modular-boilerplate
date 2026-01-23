@@ -12,5 +12,5 @@ export const useClosePreloadWindow = (currentPathname: string) => {
     if (normalizedParam === pathname) {
       window.electron.send("windowClosePreload");
     }
-  }, [currentPathname, pathname]);
+  }, [pathname]);
 };

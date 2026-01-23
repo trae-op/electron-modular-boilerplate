@@ -30,9 +30,7 @@ export const DownloadedButton = ({
     >
       <span className="flex justify-between items-center">
         <span>{children}</span>
-        {version ? (
-          <span className="ml-2 text-gray-500 text-xs">v{version}</span>
-        ) : null}
+        {version ? <strong className="ml-2 text-xs">v{version}</strong> : null}
       </span>
     </Button>
   );

@@ -1,5 +1,4 @@
 import {
-  Inject,
   IpcHandler,
   TIpcHandlerInterface,
   TParamOnInit,

@@ -16,3 +16,7 @@ export type TTrayProvider = {
   collect: (items?: TMenuItem[]) => void;
   destroy: () => void;
 };
+
+export type TUpdaterProvider = {
+  checkForUpdates: () => void;
+};

@@ -9,7 +9,6 @@ import { CheckForUpdatesService } from "./services/check-for-updates.js";
   options: {
     width: 365,
     height: 365,
-    alwaysOnTop: true,
     autoHideMenuBar: true,
     minimizable: false,
     maximizable: false,

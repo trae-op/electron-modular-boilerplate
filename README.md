@@ -504,14 +504,6 @@ npm run lint             # Run ESLint
 npm run format           # Format code with Prettier
 ```
 
-### Utilities
-
-```bash
-npm run preview          # Preview production build
-npm run check:port       # Check if port 5173 is in use
-npm run free:port        # Kill process on port (Windows only)
-```
-
 ---
 
 ## 🏗️ Building for Production
@@ -522,7 +514,7 @@ npm run free:port        # Kill process on port (Windows only)
 npm run build:mac
 ```
 
-Output: `dist/mac/reminder.app` and `dist/reminder-{version}.dmg`
+Output: `dist/mac/electron-modular-boilerplate.app` and `dist/electron-modular-boilerplate-{version}.dmg`
 
 ### Windows
 
@@ -530,7 +522,7 @@ Output: `dist/mac/reminder.app` and `dist/reminder-{version}.dmg`
 npm run build:win
 ```
 
-Output: `dist/reminder-setup-{version}.exe`
+Output: `dist/electron-modular-boilerplate-setup-{version}.exe`
 
 ### Linux
 
@@ -618,16 +610,6 @@ Light/dark mode toggle is built-in:
 const { isDarkMode, toggleTheme } = useLightDarkMode();
 ```
 
-### CSS Organization
-
-```
-src/renderer/
-├── index.css          # Tailwind base, global styles
-└── components/
-    └── Button/
-        └── style.css  # Component-specific styles (if needed)
-```
-
 ---
 
 ## 🔒 Security
@@ -638,77 +620,3 @@ src/renderer/
 - **Secure token storage** with `electron-store`
 - **No node integration** in renderer
 - **IPC validation** with TypeScript
-
----
-
-## 📖 Best Practices
-
-### TypeScript
-
-- Use `type` instead of `interface`
-- Prefix all types with `T`: `TUser`, `TAuthProvider`
-- Named exports only (no default exports)
-- Explicit return types for all functions
-
-### React
-
-- Arrow function components with `memo`
-- Custom hooks for all logic (keep components pure)
-- Props destructuring in function parameters
-- No `React.FC` - use explicit types
-
-### Main Process
-
-- Each module is self-contained
-- Services are `@Injectable()`
-- Use tokens for custom injection
-- Always type IPC payloads
-
-### File Organization
-
-- Collocate related files (component + styles + tests)
-- Use barrel exports (`index.ts`)
-- Separate types into `types.ts`
-- Group by feature, not by file type
-
----
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch: `git checkout -b feature/amazing-feature`
-3. Commit your changes: `git commit -m 'feat: add amazing feature'`
-4. Push to the branch: `git push origin feature/amazing-feature`
-5. Open a Pull Request
-
-**Commit Convention:** Follow [Conventional Commits](https://www.conventionalcommits.org/):
-
-- `feat:` - New features
-- `fix:` - Bug fixes
-- `docs:` - Documentation changes
-- `refactor:` - Code refactoring
-- `test:` - Adding tests
-- `chore:` - Maintenance tasks
-
----
-
-## 📄 License
-
-This project is licensed under the **MIT License**.
-
----
-
-## 🙏 Credits
-
-- **[@devisfuture/electron-modular](https://github.com/devisfuture/electron-modular)** - Modular architecture framework
-- **[Vite](https://vitejs.dev/)** - Build tool
-- **[Electron](https://www.electronjs.org/)** - Desktop framework
-- **[React](https://react.dev/)** - UI library
-- **[Tailwind CSS](https://tailwindcss.com/)** - Styling framework
-
----
-
-## 📞 Support
-
-- **Issues:** [GitHub Issues](https://github.com/trae-op/electron-modular-boilerplate/issues)
-- **Discussions:** [GitHub Discussions](https://github.com/trae-op/electron-modular-boilerplate/discussions)

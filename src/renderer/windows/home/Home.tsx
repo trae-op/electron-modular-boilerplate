@@ -18,6 +18,7 @@ import {
   type CSSProperties,
   Suspense,
   lazy,
+  memo,
   useCallback,
   useMemo,
   useState,
@@ -234,14 +235,18 @@ const autoItems = [
   { value: "value100", label: "Member 100" },
 ];
 
+const ShowHomeWindow = memo(() => {
+  useClosePreloadWindow("window:main");
+
+  return null;
+});
+
 const Home = () => {
   const [textValue, setTextValue] = useState("Hello world");
   const [selectValue, setSelectValue] = useState("value1");
   const [isChecked, setIsChecked] = useState(true);
   const [radioValue, setRadioValue] = useState("value1");
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-
-  useClosePreloadWindow("window:main");
 
   const handleOpenPopup = useCallback(() => {
     setIsPopupOpen(true);
@@ -276,6 +281,7 @@ const Home = () => {
 
   return (
     <ProviderUpdater>
+      <ShowHomeWindow />
       <UpdateSubscriber />
       <ProviderUser>
         <Suspense fallback={<LoadingSpinner />}>

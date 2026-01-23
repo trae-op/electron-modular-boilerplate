@@ -1,10 +1,8 @@
 import { usePaletteModeSelector } from "@composites/LightDarkMode";
-import { useClosePreloadWindow } from "@hooks/closePreloadWindow";
 import { cn } from "@utils/classes";
 import { Outlet } from "react-router-dom";
 
 export const MainLayout = () => {
-  useClosePreloadWindow("sign-in");
   const mode = usePaletteModeSelector();
 
   const wrapperClassName = cn(

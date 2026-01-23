@@ -453,23 +453,32 @@ NODE_ENV=production
 
 ### Step 4: Set Up OAuth Credentials (Backend)
 
-You need a **backend server** that handles OAuth. The backend should:
+You need a **backend server** that handles OAuth. If you don't have one, a reference implementation built with NestJS is available: **https://github.com/trae-op/nestjs-boilerplate** — it includes ready-to-use OAuth endpoints, environment examples, and JWT/session handling.
 
-1. **Register OAuth apps** with Google/GitHub:
-   - [Google Cloud Console](https://console.cloud.google.com/) → Create OAuth 2.0 Client
-   - [GitHub Settings](https://github.com/settings/developers) → New OAuth App
-2. **Configure redirect URIs:**
+1. **Configure redirect URIs** (example for local dev):
 
    ```
    http://localhost:3000/api/auth/google/callback
    http://localhost:3000/api/auth/github/callback
    ```
 
-3. **Implement endpoints:**
+2. **Environment variables** (examples used by the reference backend):
+
+   ```
+   GOOGLE_CLIENT_ID=...
+   GOOGLE_CLIENT_SECRET=...
+   GITHUB_CLIENT_ID=...
+   GITHUB_CLIENT_SECRET=...
+   JWT_SECRET=...
+   ```
+
+3. **Implement endpoints (or use the reference)**:
    - `GET /api/auth/google` - Redirect to Google OAuth
    - `GET /api/auth/github` - Redirect to GitHub OAuth
-   - `GET /api/auth/verify` - Return JWT token after successful auth
+   - `GET /api/auth/verify` - Return JWT token after successful auth (redirect target after provider auth)
    - `GET /api/user/:id` - Fetch user by ID (requires Bearer token)
+
+You need a backend server that handles OAuth. If you don't have one, a implementation built with NestJS is available: https://github.com/trae-op/nestjs-boilerplate — it includes ready-to-use OAuth endpoints that described in this `README.md`, environment examples, and JWT/session handling.
 
 ### Step 5: Run Development Mode
 
@@ -517,6 +526,24 @@ npm run test:unit:main      # Run main process tests
 npm run lint             # Run ESLint
 npm run format           # Format code with Prettier
 ```
+
+---
+
+### Prettier (Formatting) ✅
+
+- **Version:** `prettier` (^3.7.4) — configured in `package.json`.
+- **Config file:** `.prettierrc` at repo root. Key rules include `semi: true`, `trailingComma: 'all'`, `singleQuote: false`, `printWidth: 80`, `tabWidth: 2`.
+- **Import sorting:** Uses `@trivago/prettier-plugin-sort-imports` with an `importOrder` array, `importOrderSeparation: true`, and `importOrderSortSpecifiers: true` so imports are deterministic and grouped consistently.
+- **Format script:** `npm run format` runs `prettier --write "src/**/*.{ts,tsx,cts,css,json}"`.
+- **Tip:** Enable editor integration (Prettier extension / format on save) and run `npm run format` before commits to keep code style consistent.
+
+### ESLint (Linting) ✅
+
+- **Config file:** `eslint.config.js` at repo root. It uses `typescript-eslint` wrapper and `@eslint/js` recommended rules.
+- **Scope & ignore:** Lints `**/*.{ts,tsx}` and ignores `dist` (see `ignores` in config).
+- **Plugins & rules:** Includes `eslint-plugin-react-hooks` and `eslint-plugin-react-refresh`. Notable rules: React Hooks recommended rules are enabled and `react-refresh/only-export-components` is set to `warn`.
+- **Run:** `npm run lint` runs `eslint .`.
+- **Tip:** Install the ESLint extension in your editor and enable auto-fix on save for the smoothest workflow.
 
 ---
 

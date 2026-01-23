@@ -266,11 +266,16 @@ Built-in auto-update functionality using `electron-updater`:
 - **Background downloads** with progress tracking
 - **GitHub Releases integration** - fetches updates from repository releases
 - **Platform-specific implementations:**
-  - Windows: NSIS installer with differential downloads
-  - macOS: DMG with code signing support
+  - Windows: NSIS installer with differential downloads (auto-update works on Windows without code signing)
+  - macOS: DMG with code signing support. **Important:** macOS requires code signing and notarization for standard auto-update via the ecosystem. This project includes a **custom macOS auto-update implementation** (using built-in Node.js modules) so an update workflow can work without `electron-builder` code signing if you need it. If you prefer the standard signed macOS flow, use `electron-builder` and configure macOS code signing/notarization.
   - Linux: AppImage
 - **Update notifications** with system tray integration
 - **Manual update checks** via application menu
+
+### Code signing notes 🔐
+
+- **Windows:** We use `electron-builder` for Windows builds. Windows auto-update can work without code signing, so signing is optional; however, if you want signed installers, configure a Windows code signing certificate and set it in your `electron-builder` configuration.
+- **macOS:** Official macOS auto-update and distribution typically requires proper code signing and notarization. This boilerplate provides a custom macOS auto-update (not relying on `electron-builder`) to support update flows without signing. If you need code-signed macOS builds and standard auto-update behavior, configure `electron-builder` and supply the appropriate Apple Developer certificates and notarization settings.
 
 ---
 
@@ -545,8 +550,9 @@ Workflow file: [`.github/workflows/build.yml`](.github/workflows/build.yml)
 
 To enable auto-publishing:
 
-1. Create a **GitHub Personal Access Token** with `repo` scope
-2. Add it to repository secrets as `GITHUB_TOKEN` (automatically provided by GitHub Actions)
+1. Create a **GitHub Personal Access Token** (PAT). For private repositories you need the `repo` scope; for public-only publishing `public_repo` may be sufficient.
+2. In your GitHub repository go to **Settings → Secrets and variables → Actions** and add the token as a secret (common name: `GH_TOKEN`). Note: GitHub Actions also provides an automatically-generated `GITHUB_TOKEN` for workflows, but for publishing from private repositories or when workflows need elevated permissions, you should use a PAT stored as a secret.
+3. If your production build or publish scripts need access to the token at runtime, also add `GH_TOKEN` to your `.env.production` (do **not** commit this file). Keep tokens secret and never hardcode them in your repository.
 
 ---
 

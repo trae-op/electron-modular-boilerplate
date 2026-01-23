@@ -10,9 +10,22 @@ describe("UpdaterWindow", () => {
 
     const checkForUpdatesService = {
       checkForUpdates: vi.fn(),
+      setFeedUrlService: vi.fn(),
+      controlUpdateWindowsPlatformService: vi.fn(),
     } as any;
 
-    const window = new UpdaterWindow(checkForUpdatesService);
+    const setFeedUrlService = {
+      setFeedURL: vi.fn(),
+    } as any;
+
+    const controlUpdateWindowsPlatformService = {
+      controlUpdate: vi.fn(),
+    } as any;
+    const window = new UpdaterWindow(
+      checkForUpdatesService,
+      setFeedUrlService,
+      controlUpdateWindowsPlatformService,
+    );
 
     window.onWebContentsDidFinishLoad();
     window.onWebContentsDidFinishLoad();
@@ -27,8 +40,19 @@ describe("UpdaterWindow", () => {
       checkForUpdates: vi.fn(),
     } as any;
 
-    const window = new UpdaterWindow(checkForUpdatesService);
+    const setFeedUrlService = {
+      setFeedURL: vi.fn(),
+    } as any;
 
+    const controlUpdateWindowsPlatformService = {
+      controlUpdate: vi.fn(),
+    } as any;
+
+    const window = new UpdaterWindow(
+      checkForUpdatesService,
+      setFeedUrlService,
+      controlUpdateWindowsPlatformService,
+    );
     window.onWebContentsDidFinishLoad();
     window.onShow();
 

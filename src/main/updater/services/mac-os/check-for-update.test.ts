@@ -14,6 +14,27 @@ vi.mock("compare-versions", () => ({
   compareVersions: vi.fn(),
 }));
 
+vi.mock("#main/config.js", () => ({
+  folders: {
+    downloadLatestVersion: {
+      macos: {
+        root: "downloads",
+        app: "app-update",
+      },
+    },
+  },
+  messages: {
+    autoUpdater: {
+      error: "update error",
+    },
+  },
+  restApi: {
+    urls: {
+      githubReleases: "https://example.com/releases",
+    },
+  },
+}));
+
 describe("CheckForUpdateService (macOS)", () => {
   afterEach(() => {
     vi.restoreAllMocks();

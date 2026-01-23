@@ -21,8 +21,13 @@ export class DownloadFileService {
     onDownloadProgress,
   }: TOptionsDownloadFile): Promise<TUpdateData["status"]> {
     return new Promise(async (resolve, reject) => {
-      const downloadsPath = app.getPath("downloads");
-      const folderPath = path.join(downloadsPath, folders.download);
+      const downloadsPath = app.getPath(
+        folders.downloadLatestVersion.macos.root,
+      );
+      const folderPath = path.join(
+        downloadsPath,
+        folders.downloadLatestVersion.macos.app,
+      );
       const folderCreated =
         await this.createLatestVersionFolderService.createFolder(folderPath);
       if (!folderCreated.ok && folderCreated.message) {

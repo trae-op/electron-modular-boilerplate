@@ -9,6 +9,9 @@ const envPath = path.join(
 );
 dotenv.config(!isDev() ? { path: envPath } : undefined);
 
+type GetPathMethod = Electron.App["getPath"];
+type AppPathName = Parameters<GetPathMethod>[0];
+
 export const appName = "Electron React Auth Updater";
 
 export const windows: TWindows = {
@@ -21,7 +24,12 @@ export const windows: TWindows = {
 export const folders = {
   distRenderer: "dist-renderer",
   distMain: "dist-main",
-  download: "app-update",
+  downloadLatestVersion: {
+    macos: {
+      root: "downloads" as AppPathName,
+      app: "app-update",
+    },
+  },
 };
 
 export const menu = {

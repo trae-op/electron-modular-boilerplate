@@ -35,8 +35,8 @@ export class OpenLatestVersionService {
 
   openLatestVersion(updateFile: string): void {
     const updatePath = joinPosixPath(
-      app.getPath("downloads"),
-      folders.download,
+      app.getPath(folders.downloadLatestVersion.macos.root),
+      folders.downloadLatestVersion.macos.app,
       updateFile,
     );
     this.openFolder(updatePath);

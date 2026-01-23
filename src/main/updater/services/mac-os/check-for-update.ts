@@ -22,8 +22,13 @@ export class CheckForUpdateService {
         status: "checking-for-update",
       });
 
-      const downloadsPath = app.getPath("downloads");
-      const folderPath = path.join(downloadsPath, folders.download);
+      const downloadsPath = app.getPath(
+        folders.downloadLatestVersion.macos.root,
+      );
+      const folderPath = path.join(
+        downloadsPath,
+        folders.downloadLatestVersion.macos.app,
+      );
       const token = process.env.GH_TOKEN;
       const response = await fetch(`${restApi.urls.githubReleases}/latest`, {
         method: "GET",

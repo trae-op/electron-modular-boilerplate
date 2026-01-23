@@ -9,6 +9,22 @@ vi.mock("electron", () => ({
   },
 }));
 
+vi.mock("#main/config.js", () => ({
+  folders: {
+    downloadLatestVersion: {
+      macos: {
+        root: "downloads",
+        app: "app-update",
+      },
+    },
+  },
+  messages: {
+    autoUpdater: {
+      errorOpenFolder: "cannot open folder",
+    },
+  },
+}));
+
 describe("OpenLatestVersionService", () => {
   it("opens latest version file", async () => {
     const { shell } = await import("electron");

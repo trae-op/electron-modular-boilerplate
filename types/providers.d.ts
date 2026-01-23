@@ -1,1 +1,1 @@
-type TProviders = "google" | "facebook" | "github";
+type TProviders = "google" | "github";

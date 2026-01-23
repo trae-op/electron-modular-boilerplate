@@ -38,7 +38,7 @@ jobs:
         run: npm run test:unit:renderer && npm run test:unit:main
 
       - name: Run Build for macOS
-        run: npm run build:mac:publish
+        run: npm run build:mac
 
   build-windows:
     runs-on: windows-latest
@@ -60,4 +60,4 @@ jobs:
         run: npm run test:unit:renderer && npm run test:unit:main
 
       - name: Run Build for Windows
-        run: npm run build:win:publish
+        run: npm run build:win

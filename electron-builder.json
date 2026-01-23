@@ -35,7 +35,8 @@
       "provider": "github",
       "owner": "trae-op",
       "repo": "electron-modular-boilerplate",
-      "releaseType": "release"
+      "releaseType": "release",
+      "private": false
     }
   ]
 }

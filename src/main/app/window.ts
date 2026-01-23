@@ -9,8 +9,6 @@ import { isDev } from "#shared/utils.js";
 
 import { menu } from "#main/config.js";
 
-import { getElectronStorage } from "#main/@shared/store.js";
-
 import type { TWindowManager } from "../types.js";
 import { MENU_PROVIDER, TRAY_PROVIDER, UPDATER_PROVIDER } from "./tokens.js";
 import type {
@@ -86,12 +84,7 @@ export class AppWindow implements TWindowManager {
 
   onShow(): void {
     this.isWillClose = false;
-    const userId = getElectronStorage("userId");
-    const authToken = getElectronStorage("authToken");
-
-    if (userId && authToken) {
-      this.updaterProvider.checkForUpdates();
-    }
+    this.updaterProvider.checkForUpdates();
   }
 
   onClose(event: Event, window: BrowserWindow): void {

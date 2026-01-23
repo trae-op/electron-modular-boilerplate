@@ -5,7 +5,7 @@ vi.mock("@devisfuture/electron-modular", () => ({
 }));
 
 describe("UpdaterWindow", () => {
-  it("checks for updates on first load only once", async () => {
+  it("calls checkForUpdates each time the load finishes", async () => {
     const { UpdaterWindow } = await import("./window.js");
 
     const checkForUpdatesService = {
@@ -17,7 +17,7 @@ describe("UpdaterWindow", () => {
     window.onWebContentsDidFinishLoad();
     window.onWebContentsDidFinishLoad();
 
-    expect(checkForUpdatesService.checkForUpdates).toHaveBeenCalledTimes(1);
+    expect(checkForUpdatesService.checkForUpdates).toHaveBeenCalledTimes(2);
   });
 
   it("checks for updates when window is shown after first", async () => {

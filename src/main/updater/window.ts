@@ -2,8 +2,6 @@ import { WindowManager } from "@devisfuture/electron-modular";
 
 import type { TWindowManager } from "../types.js";
 import { CheckForUpdatesService } from "./services/check-for-updates.js";
-import { ControlUpdateWindowsPlatformService } from "./services/windows/control-update.js";
-import { SetFeedUrlService } from "./services/windows/set-feed-url.js";
 
 @WindowManager<TWindows["updateApp"]>({
   hash: "window:update-app",
@@ -19,14 +17,7 @@ import { SetFeedUrlService } from "./services/windows/set-feed-url.js";
 })
 export class UpdaterWindow implements TWindowManager {
   private isCheckFirst = true;
-  constructor(
-    private checkForUpdatesService: CheckForUpdatesService,
-    private setFeedUrlService: SetFeedUrlService,
-    private controlUpdateWindowsPlatformService: ControlUpdateWindowsPlatformService,
-  ) {
-    this.setFeedUrlService.setFeedURL();
-    this.controlUpdateWindowsPlatformService.controlUpdate();
-  }
+  constructor(private checkForUpdatesService: CheckForUpdatesService) {}
 
   onWebContentsDidFinishLoad(): void {
     if (this.isCheckFirst) {
@@ -36,6 +27,7 @@ export class UpdaterWindow implements TWindowManager {
   }
 
   onShow() {
+    console.log("UpdaterWindow onShowed");
     if (!this.isCheckFirst) {
       this.checkForUpdatesService.checkForUpdates();
     }

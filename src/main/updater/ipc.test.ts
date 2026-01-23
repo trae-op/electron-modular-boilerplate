@@ -38,9 +38,19 @@ describe("UpdaterIpc", () => {
       openLatestVersion: vi.fn(),
     };
 
+    const setFeedUrlService = {
+      setFeedURL: vi.fn(),
+    };
+
+    const controlUpdateWindowsPlatformService = {
+      controlUpdate: vi.fn(),
+    };
+
     const ipc = new UpdaterIpc(
       trayProvider as any,
       openLatestVersionService as any,
+      setFeedUrlService as any,
+      controlUpdateWindowsPlatformService as any,
     );
 
     const updateWindow = {
@@ -71,11 +81,20 @@ describe("UpdaterIpc", () => {
     const openLatestVersionService = {
       openLatestVersion: vi.fn(),
     };
+    const setFeedUrlService = {
+      setFeedURL: vi.fn(),
+    };
+
+    const controlUpdateWindowsPlatformService = {
+      controlUpdate: vi.fn(),
+    };
 
     const { UpdaterIpc } = await import("./ipc.js");
     const ipc = new UpdaterIpc(
       trayProvider as any,
       openLatestVersionService as any,
+      setFeedUrlService as any,
+      controlUpdateWindowsPlatformService as any,
     );
 
     await ipc.onInit({ getWindow: () => ({ create: vi.fn() }) } as any);

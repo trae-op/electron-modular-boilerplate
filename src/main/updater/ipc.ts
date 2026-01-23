@@ -11,6 +11,8 @@ import pkg from "electron-updater";
 import { ipcMainOn } from "#shared/ipc/ipc.js";
 
 import { OpenLatestVersionService } from "./services/mac-os/open-latest-version.js";
+import { ControlUpdateWindowsPlatformService } from "./services/windows/control-update.js";
+import { SetFeedUrlService } from "./services/windows/set-feed-url.js";
 import { UPDATER_TRAY_PROVIDER } from "./tokens.js";
 import type { TTrayProvider } from "./types.js";
 
@@ -23,7 +25,12 @@ export class UpdaterIpc implements TIpcHandlerInterface {
   constructor(
     @Inject(UPDATER_TRAY_PROVIDER) private trayProvider: TTrayProvider,
     private openLatestVersionService: OpenLatestVersionService,
-  ) {}
+    private setFeedUrlService: SetFeedUrlService,
+    private controlUpdateWindowsPlatformService: ControlUpdateWindowsPlatformService,
+  ) {
+    this.setFeedUrlService.setFeedURL();
+    this.controlUpdateWindowsPlatformService.controlUpdate();
+  }
 
   onInit({ getWindow }: TParamOnInit<TWindows["updateApp"]>) {
     const updateAppWindow = getWindow("window:update-app");

@@ -21,6 +21,14 @@ This is a **full-featured starter kit** designed to accelerate Electron applicat
 
 ---
 
+## Demo: Reusable authentication and custom UI
+
+![auth-ui](auth-ui-gif.gif)
+
+## Auto-update Demo
+
+![auto-update](auto-update-gif.gif)
+
 ## 🚀 Features
 
 ### Core Technologies
@@ -124,6 +132,7 @@ src/renderer/
 ├── composites/             # Cross-cutting feature blocks
 │   ├── Routes/            # Public/Private route guards
 │   ├── LightDarkMode/     # Theme toggle
+│   ├── LazyRender/        # Virtualized list renderer (react-window + AutoSizer) - renders only visible items for large collections
 │   └── AppVersion/        # Version display
 ├── conceptions/            # Domain modules (feature packages)
 │   ├── Auth/              # Authentication
@@ -571,9 +580,10 @@ The project includes **15+ production-ready React components**:
 - `Select` - Custom select dropdowns
 - `Checkbox` / `RadioGroup` - Form controls
 - `List` - Virtualized lists for performance
+- `LazyRender` - Composite for virtualized rendering (uses `react-window` + `react-virtualized-auto-sizer`). Efficiently renders only visible items in a long collection (e.g., 1,000 options may render ~10 visible rows), improving responsiveness for slow renders. Reused by `Autocomplete`/`AutocompleteMultiple` to virtualize option lists inside popovers.
 - `LoadingSpinner` - Loading states
 - `Card` - Content containers
-- `Autocomplete` - Search with suggestions
+- `Autocomplete` - Search with suggestions (supports multiple selection and uses `LazyRender` for large option sets)
 - `Popup` - Modal dialogs
 
 All components are **fully typed**, **tested**, and follow **Tailwind CSS** patterns.

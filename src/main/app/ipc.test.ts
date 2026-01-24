@@ -74,7 +74,7 @@ describe("AppIpc", () => {
       expect.objectContaining({ message: error.message }),
     );
 
-    spy.mockRestore(); // Обов'язково відновлюємо process
+    spy.mockRestore();
   });
 
   it("handles unhandled rejections", async () => {

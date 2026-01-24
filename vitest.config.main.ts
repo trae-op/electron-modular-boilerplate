@@ -28,8 +28,10 @@ export default defineConfig({
     mockReset: true,
     restoreMocks: true,
     clearMocks: true,
-    deps: {
-      inline: ["electron", "electron-store", "@devisfuture/electron-modular"],
+    server: {
+      deps: {
+        inline: ["electron", "electron-store", "@devisfuture/electron-modular"],
+      },
     },
   },
   resolve: {

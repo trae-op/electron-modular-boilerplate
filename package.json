@@ -30,7 +30,7 @@
     "build:linux:publish": "npm run transpile:electron && npm run build && electron-builder --publish always --linux --x64"
   },
   "dependencies": {
-    "@devisfuture/electron-modular": "^1.1.8",
+    "@devisfuture/electron-modular": "^1.1.11",
     "axios": "^1.10.0",
     "clsx": "^2.1.1",
     "compare-versions": "^6.1.1",

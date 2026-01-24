@@ -1,5 +1,13 @@
 import { describe, expect, it, vi } from "vitest";
 
+vi.mock("electron", () => ({
+  session: {
+    fromPartition: vi.fn().mockReturnValue({
+      clearStorageData: vi.fn().mockResolvedValue(undefined),
+    }),
+  },
+}));
+
 vi.mock("#shared/store.js", () => ({
   deleteFromElectronStorage: vi.fn(),
   deleteStore: vi.fn(),

@@ -50,30 +50,58 @@ describe("AppIpc", () => {
     const { dialog } = await import("electron");
     const { AppIpc } = await import("./ipc.js");
 
+    const spy = vi.spyOn(process, "on");
+
     new AppIpc(mockAppService as any);
 
+    const handlerCall = spy.mock.calls.find(
+      (call) => call[0] === "uncaughtException",
+    );
+    const handler = handlerCall?.[1];
+
+    if (typeof handler !== "function") {
+      throw new Error(
+        "Could not find uncaughtException handler registered by AppIpc",
+      );
+    }
+
     const error = new Error("boom");
-    (process.emit as any)("uncaughtException", error);
+    handler(error);
 
     expect(mockAppService.destroyTrayAndWindows).toHaveBeenCalled();
     expect(mockAppService.dockHide).toHaveBeenCalled();
     expect(dialog.showMessageBox).toHaveBeenCalledWith(
       expect.objectContaining({ message: error.message }),
     );
+
+    spy.mockRestore(); // Обов'язково відновлюємо process
   });
 
   it("handles unhandled rejections", async () => {
     const { dialog } = await import("electron");
     const { AppIpc } = await import("./ipc.js");
 
+    const spy = vi.spyOn(process, "on");
     new AppIpc(mockAppService as any);
 
+    const handlerCall = spy.mock.calls.find(
+      (call) => call[0] === "unhandledRejection",
+    );
+    const handler = handlerCall?.[1];
+
+    if (typeof handler !== "function") {
+      throw new Error(
+        "Could not find unhandledRejection handler registered by AppIpc",
+      );
+    }
+
     const reason = "reason";
-    const promise = Promise.reject(reason);
-    (process.emit as any)("unhandledRejection", reason, promise);
+    handler(reason, Promise.reject(reason));
 
     expect(mockAppService.destroyTrayAndWindows).toHaveBeenCalled();
     expect(dialog.showMessageBox).toHaveBeenCalled();
+
+    spy.mockRestore();
   });
 
   it("creates main window and registers close handler", async () => {

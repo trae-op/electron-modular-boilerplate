@@ -28,10 +28,12 @@ describe("AppIpc", () => {
     vi.clearAllMocks();
     process.removeAllListeners("uncaughtException");
     process.removeAllListeners("unhandledRejection");
+
+    vi.spyOn(console, "error").mockImplementation(() => {});
   });
 
   afterEach(() => {
-    vi.clearAllMocks();
+    vi.restoreAllMocks();
   });
 
   it("registers error handlers on construction", async () => {

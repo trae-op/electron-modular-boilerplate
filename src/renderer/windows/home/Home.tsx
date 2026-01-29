@@ -14,12 +14,14 @@ import {
 } from "@conceptions/Updater";
 import { Provider as ProviderUser } from "@conceptions/User";
 import { useClosePreloadWindow } from "@hooks/closePreloadWindow";
+import { useDayjs } from "@hooks/dayjs";
 import {
   type CSSProperties,
   Suspense,
   lazy,
   memo,
   useCallback,
+  useEffect,
   useMemo,
   useState,
 } from "react";
@@ -235,10 +237,73 @@ const autoItems = [
   { value: "value100", label: "Member 100" },
 ];
 
-const ShowHomeWindow = memo(() => {
+const ShowWindow = memo(() => {
   useClosePreloadWindow("window:main");
 
   return null;
+});
+
+const Confirm = memo(() => {
+  const [data, setData] = useState<TConfirm | undefined>(undefined);
+  const dayjs = useDayjs();
+  const memoizedTimeValue = useMemo(() => {
+    if (!dayjs) {
+      return null;
+    }
+
+    return {
+      timestamp: dayjs(data?.timestamp),
+    };
+  }, [dayjs, data?.timestamp]);
+
+  const handleOpenConfirmWindow = () => {
+    window.electron.send("windowConfirm");
+  };
+
+  const subscribeConfirm = useCallback(() => {
+    return window.electron.receive("confirm", (payload) => {
+      if (payload === undefined) {
+        return;
+      }
+
+      setData(payload);
+    });
+  }, []);
+
+  useEffect(() => {
+    const unSub = subscribeConfirm();
+
+    return unSub;
+  }, []);
+
+  return (
+    <div className="mt-6 w-full">
+      <div className="flex flex-col gap-3 bg-white dark:bg-gray-900 shadow-sm p-6 border border-gray-200 dark:border-gray-700 rounded-xl">
+        <div className="flex justify-between items-start gap-4">
+          <div>
+            <p className="font-semibold text-gray-900 dark:text-gray-100 text-sm">
+              Confirm Window
+            </p>
+            <p className="mt-1 text-gray-500 dark:text-gray-400 text-xs">
+              Open a separate window with a form demonstration:
+              <br />
+              {data !== undefined ? (
+                <>
+                  <strong>Message:</strong> {data.transformedMessage} <br />{" "}
+                  <strong>Date:</strong>{" "}
+                  {memoizedTimeValue?.timestamp.format("YYYY-MM-DD-HH:mm:ss")}
+                </>
+              ) : (
+                "No data yet"
+              )}
+            </p>
+          </div>
+
+          <Button onClick={handleOpenConfirmWindow}>Open Confirm Window</Button>
+        </div>
+      </div>
+    </div>
+  );
 });
 
 const Home = () => {
@@ -281,13 +346,13 @@ const Home = () => {
 
   return (
     <ProviderUpdater>
-      <ShowHomeWindow />
+      <ShowWindow />
       <UpdateSubscriber />
       <ProviderUser>
         <Suspense fallback={<LoadingSpinner />}>
           <LazyTopPanel />
         </Suspense>
-        <div className="flex flex-col">
+        <div className="flex flex-col p-4 w-full">
           <div className="mt-16 w-full">
             <div className="gap-6 grid bg-white dark:bg-gray-900 shadow-sm p-6 border border-gray-200 dark:border-gray-700 rounded-xl">
               <div className="gap-6 grid md:grid-cols-2">
@@ -338,6 +403,8 @@ const Home = () => {
               <LazyAutocompleteMultiple items={autoItems} />
             </div>
           </div>
+
+          <Confirm />
 
           <div className="mt-8 w-full">
             <div className="flex flex-col gap-3 bg-white dark:bg-gray-900 shadow-sm p-6 border border-gray-200 dark:border-gray-700 rounded-xl">

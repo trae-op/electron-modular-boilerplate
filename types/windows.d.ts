@@ -3,4 +3,5 @@ type TWindows = {
   preloadApp: "window:preload-app";
   updateApp: "window:update-app";
   auth: "window:auth";
+  confirm: "window:confirm";
 };

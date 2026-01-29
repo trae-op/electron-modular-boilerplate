@@ -9,6 +9,7 @@ import { HashRouter, Route, Routes } from "react-router-dom";
 const LazyHomeWindow = lazy(() => import("./windows/home/Home"));
 const LazyUpdaterWindow = lazy(() => import("./windows/updater/Updater"));
 const LazyLogInWindow = lazy(() => import("./windows/logIn/LogIn"));
+const LazyConfirmWindow = lazy(() => import("./windows/confirm/Confirm"));
 
 export const App = () => {
   return (
@@ -25,6 +26,7 @@ export const App = () => {
                   <Route path="/window:main" element={<LazyHomeWindow />} />
                 </Route>
 
+                <Route path="/window:confirm" element={<LazyConfirmWindow />} />
                 <Route
                   path="/window:update-app"
                   element={<LazyUpdaterWindow />}

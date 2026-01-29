@@ -7,6 +7,7 @@ type TEventPayloadReceive = {
   user: {
     user: TUser;
   };
+  confirm: TConfirm;
 };
 
 type TReceiveTypes = keyof TEventPayloadReceive;

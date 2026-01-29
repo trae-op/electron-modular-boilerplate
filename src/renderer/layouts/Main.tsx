@@ -12,7 +12,7 @@ export const MainLayout = () => {
 
   return (
     <div className={wrapperClassName}>
-      <div className="flex flex-col mx-auto px-4 py-8 w-full max-w-3xl min-h-screen">
+      <div className="flex flex-col mx-auto w-full min-h-screen">
         <div className="flex flex-1 justify-center items-center">
           <Outlet />
         </div>

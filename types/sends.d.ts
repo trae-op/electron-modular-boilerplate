@@ -8,6 +8,7 @@ type TEventPayloadSend = {
   windowAuth: {
     provider: TProviders;
   };
+  windowConfirm: undefined;
   openLatestVersion: TOpenLatestVersion;
   openUpdate: {
     id: string;

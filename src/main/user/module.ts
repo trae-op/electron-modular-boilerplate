@@ -31,5 +31,9 @@ import type { TAuthProvider, TUserRestApiProvider } from "./types.js";
       inject: [AuthService],
     },
   ],
+  lazy: {
+    enabled: true,
+    trigger: "init-user-lazy",
+  },
 })
 export class UserModule {}

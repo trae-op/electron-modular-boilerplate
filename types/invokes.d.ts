@@ -1,5 +1,6 @@
 type TEventPayloadInvoke = {
   getVersion: string;
+  "init-user-lazy": TInitDataLazy;
   confirmData?: {
     success: boolean;
   };
@@ -7,6 +8,7 @@ type TEventPayloadInvoke = {
 
 type TEventSendInvoke = {
   getVersion: string;
+  "init-user-lazy": undefined;
   confirmData: {
     message: string;
   };

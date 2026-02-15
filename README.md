@@ -8,19 +8,19 @@ A **production-ready** Electron starter template featuring **React 19**, **TypeS
 
 ## Table of Contents
 
-- [🎯 Project Overview](#🎯-project-overview): Overview of the boilerplate's features and goals.
-- [🚀 Features](#🚀-features): Core technologies used in the project.
-- [🏗️ Architecture](#🏗️-architecture): Explanation of the main and renderer process architecture.
-- [🔐 OAuth Authentication Flow](#🔐-oauth-authentication-flow): Details about the OAuth 2.0 implementation.
-- [🔄 Auto-Update System](#🔄-auto-update-system): Description of the auto-update functionality.
-- [📡 Type-Safe IPC Communication](#📡-type-safe-ipc-communication): Overview of the IPC communication setup.
-- [🧪 Testing](#🧪-testing): Information about the testing setup and structure.
-- [📚 AI Agent Documentation](#-📚-ai-agent-documentation): Guides for GitHub Copilot and AI agents.
-- [📦 Installation](#📦-installation): Steps to set up the project locally.
+- [🎯 Project Overview](#-project-overview): Overview of the boilerplate's features and goals.
+- [🚀 Features](#-features): Core technologies used in the project.
+- [🏗️ Architecture](#-architecture): Explanation of the main and renderer process architecture.
+- [🔐 OAuth Authentication Flow](#-oauth-authentication-flow): Details about the OAuth 2.0 implementation.
+- [🔄 Auto-Update System](#-auto-update-system): Description of the auto-update functionality.
+- [📡 Type-Safe IPC Communication](#-type-safe-ipc-communication): Overview of the IPC communication setup.
+- [🧪 Testing](#-testing): Information about the testing setup and structure.
+- [📚 AI Agent Documentation](#-ai-agent-documentation): Guides for GitHub Copilot and AI agents.
+- [📦 Installation](#-installation): Steps to set up the project locally.
 
 ---
 
-## 🎯 Project Overview
+## Project Overview
 
 This is a **full-featured starter kit** designed to accelerate Electron application development. Whether you're building a desktop app from scratch or migrating an existing project, this boilerplate provides:
 
@@ -43,7 +43,7 @@ This is a **full-featured starter kit** designed to accelerate Electron applicat
 
 ![auto-update](auto-update-gif.gif)
 
-## 🚀 Features
+## Features
 
 ### Core Technologies
 
@@ -79,7 +79,7 @@ This is a **full-featured starter kit** designed to accelerate Electron applicat
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
 ### Main Process Architecture
 
@@ -177,7 +177,7 @@ src/renderer/
 
 ---
 
-## 🔐 OAuth Authentication Flow
+## OAuth Authentication Flow
 
 This project implements a **complete OAuth 2.0 flow** with support for multiple providers.
 
@@ -336,7 +336,7 @@ export const useIpc = () => {
 
 ---
 
-## 🔄 Auto-Update System
+## Auto-Update System
 
 Built-in auto-update functionality using `electron-updater`:
 
@@ -357,7 +357,7 @@ Built-in auto-update functionality using `electron-updater`:
 
 ---
 
-## 📡 Type-Safe IPC Communication
+## Type-Safe IPC Communication
 
 All IPC communication is **fully typed** with a single API:
 
@@ -408,7 +408,7 @@ type TEventPayloadReceive = {
 
 ---
 
-## 🧪 Testing
+## Testing
 
 Comprehensive unit testing setup with **Vitest**:
 
@@ -453,7 +453,7 @@ src/renderer/
 
 ---
 
-## 📚 AI Agent Documentation
+## AI Agent Documentation
 
 The `.agents/skills/` folders contain **comprehensive guides optimized for GitHub Copilot**. These skills are structured as per the [Agent Skills standard](https://agentskills.io/) and include instructions, scripts, and resources to enhance Copilot's capabilities.
 
@@ -483,7 +483,7 @@ These docs help AI agents (like GitHub Copilot) understand project patterns and 
 
 ---
 
-## 📦 Installation
+## Installation
 
 ### Prerequisites
 
@@ -565,7 +565,7 @@ npm run dev:electron  # Start Electron app
 
 ---
 
-## 🛠️ Available Scripts
+## Available Scripts
 
 ### Development
 
@@ -619,7 +619,7 @@ npm run format           # Format code with Prettier
 
 ---
 
-## 🏗️ Building for Production
+## Building for Production
 
 ### macOS
 
@@ -664,7 +664,7 @@ To enable auto-publishing:
 
 ---
 
-## 📝 Project Structure Highlights
+## Project Structure Highlights
 
 ### Reusable UI Components
 
@@ -707,7 +707,7 @@ const setAuth = useSetAuthIsAuthenticatedDispatch(); // Never re-renders
 
 ---
 
-## 🎨 Styling
+## Styling
 
 ### Tailwind CSS Configuration
 
@@ -727,7 +727,7 @@ const { isDarkMode, toggleTheme } = useLightDarkMode();
 
 ---
 
-## 🔒 Security
+## Security
 
 - **Context Isolation** enabled in preload script
 - **Sandbox** enabled for OAuth windows

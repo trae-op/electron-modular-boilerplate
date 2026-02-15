@@ -21,8 +21,6 @@ export const useIpc = () => {
   }, [initUserModule]);
 
   useEffect(() => {
-    window.electron.send("user");
-
     const unSub = window.electron.receive("user", (data) => {
       if (data === undefined) {
         return;

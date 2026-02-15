@@ -256,6 +256,61 @@ async byId<R extends TUser>(id: string): Promise<R | undefined> {
 }
 ```
 
+### User module — lazy initialization (example)
+
+This project exposes the `User` feature as a **lazy main-process module**. The renderer must initialize it with `init-user-lazy` before sending the `"user"` IPC request so the main process has registered the module's IPC handlers.
+
+Main process (module declaration)
+
+```ts
+// src/main/user/module.ts
+@RgModule({
+  imports: [RestApiModule, AuthModule],
+  ipc: [UserIpc],
+  providers: [UserService],
+  lazy: {
+    enabled: true,
+    trigger: "init-user-lazy",
+  },
+})
+export class UserModule {}
+```
+
+Renderer (safe init + IPC ordering)
+
+```ts
+export const useIpc = () => {
+  const setUser = useSetUserDispatch();
+
+  const initUserModule = useCallback(async (successfulCallback: () => void) => {
+    const data = await window.electron.invoke("init-user-lazy");
+    const { initialized, error } = data;
+
+    if (initialized && error === undefined) {
+      successfulCallback();
+    }
+  }, []);
+
+  useEffect(() => {
+    initUserModule(() => {
+      window.electron.send("user");
+    });
+  }, [initUserModule]);
+
+  useEffect(() => {
+    const unSub = window.electron.receive("user", (data) => {
+      if (data === undefined) {
+        return;
+      }
+
+      setUser(data.user);
+    });
+
+    return unSub;
+  }, []);
+};
+```
+
 ### API Endpoints Used
 
 | Method | Endpoint                          | Purpose                                    |

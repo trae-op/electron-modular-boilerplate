@@ -441,26 +441,29 @@ src/renderer/
 
 ## 📚 AI Agent Documentation
 
-The `docs/` folder contains **comprehensive guides optimized for GitHub Copilot**:
+The `.agents/skills/` folders contain **comprehensive guides optimized for GitHub Copilot**. These skills are structured as per the [Agent Skills standard](https://agentskills.io/) and include instructions, scripts, and resources to enhance Copilot's capabilities.
 
-| Document                                                                          | Description                                                                       |
-| --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| [typescript.md](docs/typescript.md)                                               | TypeScript best practices (use `type` instead of `interface`, naming conventions) |
-| [javascript.md](docs/javascript.md)                                               | Modern JavaScript patterns, performance optimization, algorithms                  |
-| [react.md](docs/react.md)                                                         | React component patterns, custom hooks, props typing                              |
-| [сontext-pattern.md](docs/сontext-pattern.md)                                     | Context pattern with `useSyncExternalStore` for optimal re-renders                |
-| [main-process-modular-architecture.md](docs/main-process-modular-architecture.md) | Electron main process DI architecture                                             |
-| [renderer-process-architecture.md](docs/renderer-process-architecture.md)         | Renderer domain-driven design                                                     |
-| [ipc-communication.md](docs/ipc-communication.md)                                 | Type-safe IPC patterns                                                            |
-| [tailwind-css.md](docs/tailwind-css.md)                                           | Tailwind utility patterns                                                         |
-| [clsx-tailwind.md](docs/clsx-tailwind.md)                                         | Conditional className composition                                                 |
-| [lucide-react.md](docs/lucide-react.md)                                           | Icon usage guidelines                                                             |
-| [event-delegation-guide.md](docs/event-delegation-guide.md)                       | Event delegation patterns                                                         |
-| [react-form-instructions.md](docs/react-form-instructions.md)                     | Form handling best practices                                                      |
-| [main-process-modular-unit-tests.md](docs/main-process-modular-unit-tests.md)     | Testing main process modules                                                      |
-| [renderer-process-unit-tests.md](docs/renderer-process-unit-tests.md)             | Testing React components                                                          |
-| [electron-path-aliasing.md](docs/electron-path-aliasing.md)                       | Import path aliases configuration                                                 |
-| [git-commit-instructions.md](docs/git-commit-instructions.md)                     | Commit message conventions                                                        |
+| Document                                                                                                               | Description                                                                       |
+| ---------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| [.agents/skills/typescript/SKILL.md](.agents/skills/typescript/SKILL.md)                                               | TypeScript best practices (use `type` instead of `interface`, naming conventions) |
+| [.agents/skills/javascript/SKILL.md](.agents/skills/javascript/SKILL.md)                                               | Modern JavaScript patterns, performance optimization, algorithms                  |
+| [.agents/skills/react/SKILL.md](.agents/skills/react/SKILL.md)                                                         | React component patterns, custom hooks, props typing                              |
+| [.agents/skills/context-pattern/SKILL.md](.agents/skills/context-pattern/SKILL.md)                                     | Context pattern with `useSyncExternalStore` for optimal re-renders                |
+| [.agents/skills/main-process-modular-architecture/SKILL.md](.agents/skills/main-process-modular-architecture/SKILL.md) | Electron main process DI architecture                                             |
+| [.agents/skills/renderer-process-architecture/SKILL.md](.agents/skills/renderer-process-architecture/SKILL.md)         | Renderer domain-driven design                                                     |
+| [.agents/skills/ipc-communication/SKILL.md](.agents/skills/ipc-communication/SKILL.md)                                 | Type-safe IPC patterns                                                            |
+| [.agents/skills/tailwind-css/SKILL.md](.agents/skills/tailwind-css/SKILL.md)                                           | Tailwind utility patterns                                                         |
+| [.agents/skills/clsx-tailwind/SKILL.md](.agents/skills/clsx-tailwind/SKILL.md)                                         | Conditional className composition                                                 |
+| [.agents/skills/lucide-react/SKILL.md](.agents/skills/lucide-react/SKILL.md)                                           | Icon usage guidelines                                                             |
+| [.agents/skills/event-delegation-guide/SKILL.md](.agents/skills/event-delegation-guide/SKILL.md)                       | Event delegation patterns                                                         |
+| [.agents/skills/react-form-instructions/SKILL.md](.agents/skills/react-form-instructions/SKILL.md)                     | Form handling best practices                                                      |
+| [.agents/skills/main-process-modular-unit-tests/SKILL.md](.agents/skills/main-process-modular-unit-tests/SKILL.md)     | Testing main process modules                                                      |
+| [.agents/skills/renderer-process-unit-tests/SKILL.md](.agents/skills/renderer-process-unit-tests/SKILL.md)             | Testing React components                                                          |
+| [.agents/skills/electron-path-aliasing/SKILL.md](.agents/skills/electron-path-aliasing/SKILL.md)                       | Import path aliases configuration                                                 |
+| [.agents/skills/git-commit-instructions/SKILL.md](.agents/skills/git-commit-instructions/SKILL.md)                     | Commit message conventions                                                        |
+| [.agents/skills/large-data-iteration/SKILL.md](.agents/skills/large-data-iteration/SKILL.md)                           | Optimizing large data processing                                                  |
+| [.agents/skills/lazy-render/SKILL.md](.agents/skills/lazy-render/SKILL.md)                                             | Virtualized rendering for large lists                                             |
+| [.agents/skills/performance-monitoring/SKILL.md](.agents/skills/performance-monitoring/SKILL.md)                       | Performance monitoring and metrics                                                |
 
 These docs help AI agents (like GitHub Copilot) understand project patterns and generate consistent, high-quality code.
 

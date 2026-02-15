@@ -8,15 +8,15 @@ A **production-ready** Electron starter template featuring **React 19**, **TypeS
 
 ## Table of Contents
 
-- [🎯 Project Overview](#-project-overview): Overview of the boilerplate's features and goals.
-- [🚀 Features](#-features): Core technologies used in the project.
-- [🏗️ Architecture](#-architecture): Explanation of the main and renderer process architecture.
-- [🔐 OAuth Authentication Flow](#-oauth-authentication-flow): Details about the OAuth 2.0 implementation.
-- [🔄 Auto-Update System](#-auto-update-system): Description of the auto-update functionality.
-- [📡 Type-Safe IPC Communication](#-type-safe-ipc-communication): Overview of the IPC communication setup.
-- [🧪 Testing](#-testing): Information about the testing setup and structure.
-- [📚 AI Agent Documentation](#-ai-agent-documentation): Guides for GitHub Copilot and AI agents.
-- [📦 Installation](#-installation): Steps to set up the project locally.
+- [🎯 Project Overview](#project-overview): Overview of the boilerplate's features and goals.
+- [🚀 Features](#features): Core technologies used in the project.
+- [🏗️ Architecture](#architecture): Explanation of the main and renderer process architecture.
+- [🔐 OAuth Authentication Flow](#oauth-authentication-flow): Details about the OAuth 2.0 implementation.
+- [🔄 Auto-Update System](#auto-update-system): Description of the auto-update functionality.
+- [📡 Type-Safe IPC Communication](#type-safe-ipc-communication): Overview of the IPC communication setup.
+- [🧪 Testing](#testing): Information about the testing setup and structure.
+- [📚 AI Agent Documentation](#ai-agent-documentation): Guides for GitHub Copilot and AI agents.
+- [📦 Installation](#installation): Steps to set up the project locally.
 
 ---
 

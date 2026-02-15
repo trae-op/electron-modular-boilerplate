@@ -1324,3 +1324,83 @@ When creating new modules:
 - Follow existing naming and structure conventions
 
 This architecture ensures maintainability, scalability, and clear organization of the Electron main process.
+
+### Example: Using Services with Authorization Token
+
+The `UserService` in the `user` module demonstrates how to securely interact with REST APIs using an `authToken`. Below is an example implementation that retrieves user data by ID while ensuring proper authorization handling.
+
+#### Implementation
+
+1. **Authorization Header**: The `authToken` is retrieved from persistent storage and included in the `Authorization` header of the HTTP request.
+2. **Error Handling**: Handles `401 Unauthorized` errors by logging out the user and notifying the main application window.
+
+#### Code Example
+
+```typescript
+import { Inject, Injectable, getWindow } from "@devisfuture/electron-modular";
+import { type AxiosRequestConfig } from "axios";
+
+import { getElectronStorage } from "#shared/store.js";
+
+import { restApi } from "../config.js";
+
+import { AUTH_PROVIDER, USER_REST_API_PROVIDER } from "./tokens.js";
+import type { TAuthProvider, TUserRestApiProvider } from "./types.js";
+
+@Injectable()
+export class UserService {
+  constructor(
+    @Inject(USER_REST_API_PROVIDER)
+    private restApiProvider: TUserRestApiProvider,
+    @Inject(AUTH_PROVIDER) private authProvider: TAuthProvider,
+  ) {}
+
+  private getAuthorization(): AxiosRequestConfig["headers"] {
+    const token = getElectronStorage("authToken");
+
+    if (token !== undefined) {
+      return {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      };
+    }
+
+    return;
+  }
+
+  async byId<R extends TUser>(id: string): Promise<R | undefined> {
+    const response = await this.restApiProvider.get<R>(
+      `${restApi.urls.base}${restApi.urls.baseApi}${
+        restApi.urls.user.base
+      }${restApi.urls.user.byId(id)}`,
+      {
+        headers: this.getAuthorization(),
+        isCache: true,
+      },
+    );
+
+    if (
+      response.error !== undefined &&
+      response.error.details?.statusCode === 401
+    ) {
+      const mainWindow = getWindow<TWindows["main"]>("window:main");
+      if (mainWindow !== undefined) {
+        this.authProvider.logout(mainWindow);
+      }
+      return;
+    }
+
+    if (response.error !== undefined) {
+      return;
+    }
+
+    return response.data;
+  }
+}
+```
+
+This example illustrates how to:
+
+- Retrieve the `authToken` securely from persistent storage.
+- Include the token in the `Authorization` header for API requests.
+- Handle authentication errors gracefully by logging out the user and notifying the main application window.

@@ -1,4 +1,17 @@
-# AI Agent React Context Pattern Guide
+---
+name: context-pattern
+description: Provides a React Context implementation pattern using useSyncExternalStore, with types, hooks, and examples. Be specific about capabilities and when to use the skill.
+---
+
+# React Context Pattern Guide
+
+### When to use this skill ✅
+
+- Create a reusable Context implementation that avoids unnecessary re-renders.
+- Add a standardized pattern for `Context` + selector hooks across a repository.
+- Provide examples, templates, or scripts for implementing `useSyncExternalStore`-based contexts.
+- Share best practices for performance-sensitive state management and selector optimization.
+- Teach the agent to apply this pattern during code reviews, refactors, or feature scaffolding.
 
 ## Overview
 
@@ -12,7 +25,7 @@ This Context Pattern uses the following key concepts:
 2. **Subscription Pattern**: Components subscribe to state changes manually
 3. **useSyncExternalStore**: React 18+ hook for subscribing to external stores with automatic re-rendering
 4. **Type Safety**: Full TypeScript support with explicit type definitions
-5. **Separation of Concerns**:  Separate files for types, context, hooks, and selectors
+5. **Separation of Concerns**: Separate files for types, context, hooks, and selectors
 
 ### Why This Pattern?
 
@@ -29,20 +42,18 @@ This Context Pattern uses the following key concepts:
 ## File Structure
 
 ```architecture
-src/
-└── context/
-    └── FeatureName/
-        ├── Context.tsx      # Context creation and Provider component
-        ├── types.ts         # TypeScript type definitions
-        ├── useContext.ts    # Custom hook to access context
-        ├── useSelectors.ts  # Selector hooks using useSyncExternalStore
-        └── index.ts         # Public exports
+context/
+├── Context.tsx      # Context creation and Provider component
+├── types.ts         # TypeScript type definitions
+├── useContext.ts    # Custom hook to access context
+├── useSelectors.ts  # Selector hooks using useSyncExternalStore
+└── index.ts         # Public exports
 ```
 
 ### Naming Conventions
 
 - **Folder**: Use PascalCase feature name (e.g., `CreateTask`, `UserProfile`, `ShoppingCart`)
-- **Files**: Use exact names:  `Context.tsx`, `types.ts`, `useContext.ts`, `useSelectors.ts`
+- **Files**: Use exact names: `Context.tsx`, `types.ts`, `useContext.ts`, `useSelectors.ts`
 - **Exports**: Export from `index.ts` for clean imports
 
 ---
@@ -77,11 +88,11 @@ export type TContext = {
   // Getters - return current state values
   getIsOpen: () => boolean;
   getLatestTask: () => TTask | undefined;
-  
+
   // Setters - update state values
   setIsOpen: (value: boolean) => void;
   setLatestTask: (value:  TTask | undefined) => void;
-  
+
   // Subscribe function - for useSyncExternalStore integration
   subscribe: (callback: TSubscriberCallback) => () => void;
 };
@@ -91,8 +102,8 @@ export type TContext = {
 
 1. **Always define `TProviderProps`** using `PropsWithChildren`
 2. **Always define `TSubscriberCallback`** as `() => void`
-3. **Always define `TContext`** with: 
-   - Getter functions:  `get{StateName}:  () => StateType`
+3. **Always define `TContext`** with:
+   - Getter functions: `get{StateName}:  () => StateType`
    - Setter functions: `set{StateName}: (value: StateType) => void`
    - Subscribe function: `subscribe: (callback: TSubscriberCallback) => () => void`
 
@@ -121,20 +132,20 @@ export function Provider({ children }: TProviderProps) {
   // ============================================
   // STATE REFS - Store state without causing re-renders
   // ============================================
-  
+
   const isOpen = useRef<boolean>(false);
   const latestTask = useRef<TTask | undefined>(undefined);
-  
+
   // ============================================
   // SUBSCRIBERS SET - Track all subscribed callbacks
   // ============================================
-  
+
   const subscribers = useRef<Set<TSubscriberCallback>>(new Set());
 
   // ============================================
   // GETTERS - Return current state values
   // ============================================
-  
+
   const getIsOpen = useCallback((): boolean => {
     return isOpen.current;
   }, []);
@@ -146,7 +157,7 @@ export function Provider({ children }: TProviderProps) {
   // ============================================
   // SETTERS - Update state and notify subscribers
   // ============================================
-  
+
   const setIsOpen = useCallback((value: boolean): void => {
     // Optimization: skip if value hasn't changed
     if (isOpen.current === value) {
@@ -154,7 +165,7 @@ export function Provider({ children }: TProviderProps) {
     }
 
     isOpen.current = value;
-    
+
     // Notify all subscribers about the change
     subscribers.current. forEach((callback) => callback());
   }, []);
@@ -167,7 +178,7 @@ export function Provider({ children }: TProviderProps) {
   // ============================================
   // SUBSCRIBE - Allow components to subscribe to changes
   // ============================================
-  
+
   const subscribe = useCallback((callback: TSubscriberCallback) => {
     subscribers.current. add(callback);
 
@@ -180,7 +191,7 @@ export function Provider({ children }: TProviderProps) {
   // ============================================
   // RENDER PROVIDER
   // ============================================
-  
+
   return (
     <Context. Provider
       value={{
@@ -199,7 +210,7 @@ export function Provider({ children }: TProviderProps) {
 
 ### Provider Implementation Rules
 
-1. **Create context with `null`**:  `createContext<TContext | null>(null)`
+1. **Create context with `null`**: `createContext<TContext | null>(null)`
 2. **Use `useRef` for state**: Never use `useState` for stored values
 3. **Use `useRef<Set<TSubscriberCallback>>` for subscribers**: Initialize with `new Set()`
 4. **Wrap all functions in `useCallback`**: With empty dependency array `[]`
@@ -207,7 +218,7 @@ export function Provider({ children }: TProviderProps) {
 6. **Setters**:
    - Optionally check if value changed (for optimization)
    - Update `ref.current`
-   - Call all subscribers:  `subscribers.current.forEach((callback) => callback())`
+   - Call all subscribers: `subscribers.current.forEach((callback) => callback())`
 7. **Subscribe function**:
    - Add callback to Set
    - Return cleanup function that removes callback from Set
@@ -228,7 +239,7 @@ import type { TContext } from "./types";
 /**
  * Custom hook to access the context
  * Throws an error if used outside of Provider
- * 
+ *
  * @returns TContext - The context value with all methods
  * @throws Error if context is not available
  */
@@ -245,11 +256,11 @@ export const useCreateTaskContext = (): TContext => {
 
 ### Hook Implementation Rules
 
-1. **Name the hook**:  `use{FeatureName}Context` (e.g., `useCreateTaskContext`, `useUserProfileContext`)
+1. **Name the hook**: `use{FeatureName}Context` (e.g., `useCreateTaskContext`, `useUserProfileContext`)
 2. **Import React's `useContext`** from "react"
 3. **Import `Context`** from local "./Context"
 4. **Import `TContext` type** from "./types"
-5. **Check for null**:  Always throw descriptive error if context is null
+5. **Check for null**: Always throw descriptive error if context is null
 6. **Return typed context**: Function must return `TContext`
 
 ---
@@ -271,7 +282,7 @@ import { useCreateTaskContext } from "./useContext";
 /**
  * Selector hook for isOpen state
  * Only re-renders when isOpen changes
- * 
+ *
  * @returns boolean - Current isOpen value
  */
 export const useCreateTaskModalOpenSelector = (): boolean => {
@@ -283,7 +294,7 @@ export const useCreateTaskModalOpenSelector = (): boolean => {
 /**
  * Selector hook for latestTask state
  * Only re-renders when latestTask changes
- * 
+ *
  * @returns TTask | undefined - Current latestTask value
  */
 export const useLatestCreatedTaskSelector = (): TTask | undefined => {
@@ -299,7 +310,7 @@ export const useLatestCreatedTaskSelector = (): TTask | undefined => {
 /**
  * Dispatch hook for setIsOpen
  * Returns the setter function for external use
- * 
+ *
  * @returns (value: boolean) => void
  */
 export const useSetCreateTaskModalOpenDispatch = () => {
@@ -309,7 +320,7 @@ export const useSetCreateTaskModalOpenDispatch = () => {
 /**
  * Dispatch hook for setLatestTask
  * Returns the setter function for external use
- * 
+ *
  * @returns (value: TTask | undefined) => void
  */
 export const useSetLatestCreatedTaskDispatch = () => {
@@ -322,9 +333,9 @@ export const useSetLatestCreatedTaskDispatch = () => {
 #### Selector Hooks (for reading state)
 
 1. **Name pattern**: `use{FeatureName}{StateName}Selector`
-2. **Use `useSyncExternalStore`**:  Import from "react"
+2. **Use `useSyncExternalStore`**: Import from "react"
 3. **Destructure `subscribe` and getter**: `const { get{State}, subscribe } = useContext()`
-4. **Return**:  `useSyncExternalStore(subscribe, getter, getter)`
+4. **Return**: `useSyncExternalStore(subscribe, getter, getter)`
    - First param: subscribe function
    - Second param: getSnapshot (client)
    - Third param: getServerSnapshot (SSR - use same getter)
@@ -374,7 +385,7 @@ const setIsOpen = useCallback((value: boolean): void => {
   if (isOpen.current === value) {
     return;
   }
-  
+
   isOpen.current = value;
   subscribers.current.forEach((callback) => callback());
 }, []);
@@ -423,11 +434,11 @@ export type TContext = {
   getItems: () => TCartItem[];
   getIsCartOpen: () => boolean;
   getTotalPrice: () => number;
-  
+
   // Setters
   setItems: (value: TCartItem[]) => void;
   setIsCartOpen: (value: boolean) => void;
-  
+
   // Subscribe
   subscribe: (callback: TSubscriberCallback) => () => void;
 };
@@ -446,7 +457,7 @@ export function Provider({ children }: TProviderProps) {
   // State refs
   const items = useRef<TCartItem[]>([]);
   const isCartOpen = useRef<boolean>(false);
-  
+
   // Subscribers
   const subscribers = useRef<Set<TSubscriberCallback>>(new Set());
 
@@ -476,7 +487,7 @@ export function Provider({ children }: TProviderProps) {
     if (isCartOpen.current === value) {
       return;
     }
-    
+
     isCartOpen.current = value;
     subscribers.current.forEach((callback) => callback());
   }, []);
@@ -581,12 +592,12 @@ export type { TContext, TCartItem } from "./types";
 
 When generating Context Pattern, ensure you:
 
-- **Create all 4 files:**  `Context.tsx`, `types.ts`, `useContext.ts`, `useSelectors.ts`
+- **Create all 4 files:** `Context.tsx`, `types.ts`, `useContext.ts`, `useSelectors.ts`
 - Use `useRef` for state storage (NOT `useState`)
 - Use `useRef<Set<TSubscriberCallback>>` for subscribers
 - Wrap all functions in `useCallback` with empty dependency array
-- **Create getter for each state:**  `get{StateName}`
-- **Create setter for each state:**  `set{StateName}`
+- **Create getter for each state:** `get{StateName}`
+- **Create setter for each state:** `set{StateName}`
 - **Setters must notify all subscribers:** `subscribers.current.forEach((callback) => callback())`
 - Subscribe function must return unsubscribe cleanup function
 - Custom hook throws error when context is null

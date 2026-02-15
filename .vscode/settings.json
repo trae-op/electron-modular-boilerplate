@@ -1,18 +1,7 @@
 {
-  "github.copilot.chat.codeGeneration.instructions": [
-    {
-      "file": "./docs/typescript.md"
-    },
-    {
-      "file": "./docs/сontext-pattern.md"
-    },
-    {
-      "file": "./docs/javascript.md"
-    }
-  ],
   "github.copilot.chat.commitMessageGeneration.instructions": [
     {
-      "file": "./docs/git-commit-instructions.md"
+      "file": ".agents/git-commit-instructions.md"
     }
   ]
 }

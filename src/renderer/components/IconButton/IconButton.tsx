@@ -5,7 +5,7 @@ import type { CSSProperties } from "react";
 import type { TIconButtonProps } from "./types";
 
 const baseClassName =
-  "inline-flex items-center justify-center rounded-full p-2 text-gray-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:cursor-not-allowed disabled:opacity-60 hover:bg-gray-100 dark:text-gray-100 dark:hover:bg-gray-700";
+  "inline-flex items-center justify-center rounded-full p-2 text-gray-700 transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 disabled:cursor-not-allowed disabled:opacity-60 hover:bg-gray-100 dark:text-gray-100 dark:hover:bg-gray-700";
 
 export const IconButton = memo((props: TIconButtonProps) => {
   const {

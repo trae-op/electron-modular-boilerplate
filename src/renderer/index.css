@@ -16,9 +16,28 @@
 
   #root {
     @apply min-h-screen;
+    /* Optimize repaints by isolating layers */
+    contain: layout style;
   }
 
   a {
     @apply text-blue-600 hover:text-blue-700;
+  }
+
+  /* Reduce input lag with optimized focus states */
+  input,
+  textarea,
+  select {
+    @apply focus:outline-none;
+  }
+}
+
+@layer utilities {
+  /* GPU-accelerated hover effect */
+  .hover-lift {
+    @apply transition-transform duration-150;
+  }
+  .hover-lift:hover {
+    transform: translateY(-1px);
   }
 }

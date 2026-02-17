@@ -4,24 +4,24 @@ import { memo, useMemo } from "react";
 import type { TButtonColor, TButtonProps, TButtonVariant } from "./types";
 
 const baseButtonClassName =
-  "inline-flex items-center justify-center rounded-md border px-4 py-2 text-sm font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white disabled:cursor-not-allowed disabled:opacity-60 dark:focus:ring-offset-gray-900";
+  "inline-flex items-center justify-center gap-2 rounded-lg border px-4 py-2 text-sm font-medium transition-colors duration-150 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 will-change-transform";
 
 const focusRingByColor: Record<TButtonColor, string> = {
-  primary: "focus:ring-blue-500",
-  secondary: "focus:ring-purple-500",
-  success: "focus:ring-green-500",
-  error: "focus:ring-red-500",
+  primary: "focus-visible:ring-2 focus-visible:ring-blue-500",
+  secondary: "focus-visible:ring-2 focus-visible:ring-purple-500",
+  success: "focus-visible:ring-2 focus-visible:ring-green-500",
+  error: "focus-visible:ring-2 focus-visible:ring-red-500",
 };
 
 const containedByColor: Record<TButtonColor, string> = {
   primary:
-    "border-blue-600 bg-blue-600 text-white shadow-sm hover:bg-blue-700 hover:border-blue-700 dark:border-blue-500 dark:bg-blue-500 dark:text-white dark:hover:bg-blue-400 dark:hover:border-blue-400",
+    "border-transparent bg-blue-600 text-white hover:bg-blue-700 active:bg-blue-800 dark:bg-blue-500 dark:hover:bg-blue-600",
   secondary:
-    "border-purple-600 bg-purple-600 text-white shadow-sm hover:bg-purple-700 hover:border-purple-700 dark:border-purple-500 dark:bg-purple-500 dark:text-white dark:hover:bg-purple-400 dark:hover:border-purple-400",
+    "border-transparent bg-purple-600 text-white hover:bg-purple-700 active:bg-purple-800 dark:bg-purple-500 dark:hover:bg-purple-600",
   success:
-    "border-green-600 bg-green-600 text-white shadow-sm hover:bg-green-700 hover:border-green-700 dark:border-green-500 dark:bg-green-500 dark:text-white dark:hover:bg-green-400 dark:hover:border-green-400",
+    "border-transparent bg-green-600 text-white hover:bg-green-700 active:bg-green-800 dark:bg-green-500 dark:hover:bg-green-600",
   error:
-    "border-red-600 bg-red-600 text-white shadow-sm hover:bg-red-700 hover:border-red-700 dark:border-red-500 dark:bg-red-500 dark:text-white dark:hover:bg-red-400 dark:hover:border-red-400",
+    "border-transparent bg-red-600 text-white hover:bg-red-700 active:bg-red-800 dark:bg-red-500 dark:hover:bg-red-600",
 };
 
 const outlinedByColor: Record<TButtonColor, string> = {

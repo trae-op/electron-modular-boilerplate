@@ -1,6 +1,6 @@
 ---
 name: main-process-modular-architecture
-description: Design or refactor Electron main modules using the project DI pattern: module/service/ipc/window separation with typed providers.
+description: Use when designing or refactoring Electron main-process feature modules; enforces project modular architecture with module/service/ipc/window separation, DI providers/tokens, imports/exports boundaries, and typed contracts.
 argument-hint: "[module goal] [main feature folder] [ipc/window requirements]"
 user-invokable: true
 disable-model-invocation: false
@@ -8,15 +8,15 @@ disable-model-invocation: false
 
 # Skill Instructions
 
-Use this skill when the request matches **Electron Main Process Architecture Guide** or references patterns from **docs/main-process-modular-architecture.md**.
+Use this skill when the request matches **Electron Main Process Architecture Guide**.
 
 ## Workflow
 
 1. Read [SOURCE.md](./SOURCE.md) for the full repository guidance.
 2. Identify concrete constraints, conventions, and required outputs.
 3. Apply the guidance directly to the current task, keeping changes minimal and repository-consistent.
-4. Validate results (tests/lint/build where relevant).
-5. Summarize what was applied from this skill and where.
+   Don't validate results (tests/lint/build where relevant). Wait until I tell you this!
+4. Summarize what was applied from this skill and where.
 
 ## Input Guidance
 
@@ -25,8 +25,3 @@ When invoking this skill manually, include:
 - Task goal
 - Target files or modules
 - Any constraints (performance, architecture, style, tests)
-
-## Source
-
-This skill is generated from [docs/main-process-modular-architecture.md](../../../docs/main-process-modular-architecture.md).
-Use [SOURCE.md](./SOURCE.md) as the canonical local resource loaded on demand.
